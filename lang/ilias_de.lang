@@ -1,20 +1,20 @@
-obj_xsurwb#:#Test Repository Object
-objs_xsurwb#:#Test Repository Objects
-obj_xsurwb_duplicate#:#Kopieren
-objs_xsurwb_duplicate#:#Kopiere Test Repository Objects
-obj_xsurwb_select#:#Wähle Test Repository Object
-xsurwb_add#:#Test Repository Object hinzufügen
-xsurwb_new#:#Neues Test Repository Object
-xsurwb_read#:#Lesezugriff auf Test Repository Object
-xsurwb_write#:#Test Repository Object bearbeiten
-xsurwb_delete#:#Test Repository Object löschen
-xsurwb_visible#:#Test Repository Object ist sichtbar
-xsurwb_edit_permission#:#Zugriffsrecht bearbeiten
-crs_create_xsurwb#:#Erstelle Test Repository Object
-grp_create_xsurwb#:#Erstelle Test Repository Object
-fold_create_xsurwb#:#Erstelle Test Repository Object
-root_create_xsurwb#:#Erstelle Test Repository Object
-cat_create_xsurwb#:#Erstelle Test Repository Object
+obj_xswb#:#Test Repository Object
+objs_xswb#:#Test Repository Objects
+obj_xswb_duplicate#:#Kopieren
+objs_xswb_duplicate#:#Kopiere Test Repository Objects
+obj_xswb_select#:#Wähle Test Repository Object
+xswb_add#:#Test Repository Object hinzufügen
+xswb_new#:#Neues Test Repository Object
+xswb_read#:#Lesezugriff auf Test Repository Object
+xswb_write#:#Test Repository Object bearbeiten
+xswb_delete#:#Test Repository Object löschen
+xswb_visible#:#Test Repository Object ist sichtbar
+xswb_edit_permission#:#Zugriffsrecht bearbeiten
+crs_create_xswb#:#Erstelle Test Repository Object
+grp_create_xswb#:#Erstelle Test Repository Object
+fold_create_xswb#:#Erstelle Test Repository Object
+root_create_xswb#:#Erstelle Test Repository Object
+cat_create_xswb#:#Erstelle Test Repository Object
 title#:#Titel
 description#:#Beschreibung
 online#:#Online
@@ -43,6 +43,6 @@ lp_status#:#Lernfortschritt
 update_successful#:Die Änderungen wurden gespeichert.
 news_title#:#Titel (en)
 news_content#:#Inhalt (en)
-xsurwb_copy#:#Test Repository Object kopieren
+xswb_copy#:#Test Repository Object kopieren
 offline#:#Offline
 status#:#Status

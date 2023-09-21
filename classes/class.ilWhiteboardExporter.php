@@ -17,7 +17,7 @@
  *********************************************************************/
 
 /**
- * Class ilTestRepositoryObjectExporter
+ * Class ilWhiteboardExporter
  * @author Oskar Truffer <ot@studer-raimann.ch>
  */
 class ilWhiteboardExporter extends ilXmlExporter
@@ -34,14 +34,14 @@ class ilWhiteboardExporter extends ilXmlExporter
     {
         $ref_ids = ilObject::_getAllReferences($a_id);
         $ref_id = array_shift($ref_ids);
-        $entity = new ilObjTestRepositoryObject($ref_id);
+        $entity = new ilObjWhiteboard($ref_id);
 
         $writer = new ilXmlWriter();
-        $writer->xmlStartTag("xsurwb");
+        $writer->xmlStartTag("xswb");
         $writer->xmlElement("title", null, $entity->getTitle());
         $writer->xmlElement("description", null, $entity->getDescription());
         $writer->xmlElement("online", null, $entity->isOnline());
-        $writer->xmlEndTag("xsurwb");
+        $writer->xmlEndTag("xswb");
 
         return $writer->xmlDumpMem(false);
     }
@@ -69,7 +69,7 @@ class ilWhiteboardExporter extends ilXmlExporter
     {
         return array(
             "5.2.0" => array(
-                "namespace" => "http://www.ilias.de/Plugins/TestRepositoryObject/md/5_2",
+                "namespace" => "http://www.ilias.de/Plugins/Whiteboard/md/5_2",
                 "xsd_file" => "ilias_md_5_2.xsd",
                 "min" => "5.2.0",
                 "max" => ""

@@ -6,7 +6,7 @@
  */
 class ilObjWhiteboardGUI extends ilObjectPluginGUI
 {
-    public const LP_SESSION_ID = 'xsurwb_lp_session_state';
+    public const LP_SESSION_ID = 'xswb_lp_session_state';
     protected ilCtrl $ctrl;
     protected ilTabsGUI $tabs;
     public ilGlobalTemplateInterface $tpl;
@@ -111,7 +111,7 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
     protected function initPropertiesForm() : ilPropertyFormGUI
     {
         $form = new ilPropertyFormGUI();
-        $form->setTitle($this->plugin->txt("obj_xsurwb"));
+        $form->setTitle($this->plugin->txt("obj_xswb"));
 
         $title = new ilTextInputGUI($this->plugin->txt("title"), "title");
         $title->setRequired(true);
@@ -164,7 +164,7 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
 
         $this->tabs->activateTab("content");
 
-        /** @var ilObjTestRepositoryObject $object */
+        /** @var ilObjWhiteboard $object */
         $object = $this->object;
 
         $form = new ilPropertyFormGUI();
@@ -225,7 +225,7 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
         $i->setInfo($this->plugin->txt("lp_status_info"));
         $form->addItem($i);
         $idIlias = $this->getObject()->getId();
-        $tpl = new ilTemplate('text.html', true, true, "./Customizing/global/plugins/Services/Repository/RepositoryObject/TestRepositoryObject/render");
+        $tpl = new ilTemplate('text.html', true, true, "./Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render");
         $tpl->setVariable("CONTENT", $idIlias);
         //var_dump($tpl);
         //exit;
@@ -234,7 +234,7 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
 
     }
 
-    private function fillObject(ilObjTestRepositoryObject $object, ilPropertyFormGUI $form) : void
+    private function fillObject(ilObjWhiteboard $object, ilPropertyFormGUI $form) : void
     {
         $object->setTitle($form->getInput('title'));
         $object->setDescription($form->getInput('description'));
@@ -362,9 +362,9 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
        // $this->tpl->setOnScreenMessage("success", "El botón funciona del carajo", true);
         global $DIC;
 
-        $DIC->globalScreen()->layout()->meta()->addJs('Customizing/global/plugins/Services/Repository/RepositoryObject/TestRepositoryObject/render/templates/default/static/js/main.3f117116.js');
-        $DIC->globalScreen()->layout()->meta()->addCss('Customizing/global/plugins/Services/Repository/RepositoryObject/TestRepositoryObject/render/templates/default/static/css/main.409a98c6.css');
-        $tpl = new ilTemplate('index.html', true, true, "Customizing/global/plugins/Services/Repository/RepositoryObject/TestRepositoryObject/render");
+        $DIC->globalScreen()->layout()->meta()->addJs('Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render/templates/default/static/js/main.3f117116.js');
+        $DIC->globalScreen()->layout()->meta()->addCss('Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render/templates/default/static/css/main.409a98c6.css');
+        $tpl = new ilTemplate('index.html', true, true, "Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render");
         $idIlias = $this->getObject()->getId();
         $tpl->setVariable("CONTENT", $idIlias);
         $this->tpl->setContent($tpl->get());

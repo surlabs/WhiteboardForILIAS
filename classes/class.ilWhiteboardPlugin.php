@@ -18,7 +18,7 @@
 
 class ilWhiteboardPlugin extends ilRepositoryObjectPlugin
 {
-    public const ID = "xsurwb";
+    public const ID = "xswb";
 
     // must correspond to the plugin subdirectory
     public function getPluginName() : string

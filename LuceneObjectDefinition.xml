@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ObjectDefinition xmlns:xi="http://www.w3.org/2001/XInclude" type="xsurwb">
+<ObjectDefinition xmlns:xi="http://www.w3.org/2001/XInclude" type="xswb">
 	<Document type="default">
 		<xi:include href="../../../../../../../Services/Object/LuceneDataSource.xml" />
 		<DataSource type="JDBC" action="append">

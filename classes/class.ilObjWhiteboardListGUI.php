@@ -27,12 +27,12 @@ class ilObjWhiteboardListGUI extends ilObjectPluginListGUI
 
     public function initType() : void
     {
-        $this->setType(ilTestRepositoryObjectPlugin::ID);
+        $this->setType(ilWhiteboardPlugin::ID);
     }
 
     public function getGuiClass() : string
     {
-        return "ilObjTestRepositoryObjectGUI";
+        return "ilObjWhiteboardGUI";
     }
 
     public function initCommands() : array
@@ -66,7 +66,7 @@ class ilObjWhiteboardListGUI extends ilObjectPluginListGUI
 
         $props = array();
         
-        if (!ilObjTestRepositoryObjectAccess::checkOnline($this->obj_id)) {
+        if (!ilObjWhiteboardAccess::checkOnline($this->obj_id)) {
             $props[] = array("alert" => true,
                              "property" => $this->txt("status"),
                              "value" => $this->txt("offline")

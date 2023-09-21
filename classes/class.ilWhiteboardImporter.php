@@ -17,7 +17,7 @@
  *********************************************************************/
 
 /**
- * Class ilTestRepositoryObjectImporter
+ * Class ilWhiteboardImporter
  * @author Oskar Truffer <ot@studer-raimann.ch>
  */
 class ilWhiteboardImporter extends ilXmlImporter
@@ -36,14 +36,14 @@ class ilWhiteboardImporter extends ilXmlImporter
         ilImportMapping $a_mapping
     ) : void {
         $xml = simplexml_load_string($a_xml);
-        $pl = new ilTestRepositoryObjectPlugin();
-        $entity = new ilObjTestRepositoryObject();
+        $pl = new ilWhiteboardPlugin();
+        $entity = new ilObjWhiteboard();
         $entity->setTitle((string) $xml->title . " " . $pl->txt("copy"));
         $entity->setDescription((string) $xml->description);
         $entity->setOnline((string) $xml->online);
         $entity->setImportId($a_id);
         $entity->create();
         $new_id = $entity->getId();
-        $a_mapping->addMapping("Plugins/TestObjectRepository", "xsurwb", $a_id, $new_id);
+        $a_mapping->addMapping("Plugins/TestObjectRepository", "xswb", $a_id, $new_id);
     }
 }

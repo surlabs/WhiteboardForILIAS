@@ -1,20 +1,20 @@
-obj_xsurwb#:#Test Repository Object
-objs_xsurwb#:#Test Repository Objects
-obj_xsurwb_duplicate#:#Copy
-objs_xsurwb_duplicate#:#Copy Test Repository Objects
-obj_xsurwb_select#:#Select Test Repository Object
-xsurwb_add#:#Add Test Repository Object
-xsurwb_new#:#Add New Test Repository Object
-xsurwb_read#:#Read access to Test Repository Object
-xsurwb_write#:#Edit Test Repository Object
-xsurwb_delete#:#Delete Test Repository Object
-xsurwb_visible#:#Test Repository Object is visible
-xsurwb_edit_permission#:#Change permission settings
-crs_create_xsurwb#:#Create Test Repository Object
-grp_create_xsurwb#:#Create Test Repository Object
-fold_create_xsurwb#:#Create Test Repository Object
-root_create_xsurwb#:#Create Test Repository Object
-cat_create_xsurwb#:#Create Test Repository Object
+obj_xswb#:#Test Repository Object
+objs_xswb#:#Test Repository Objects
+obj_xswb_duplicate#:#Copy
+objs_xswb_duplicate#:#Copy Test Repository Objects
+obj_xswb_select#:#Select Test Repository Object
+xswb_add#:#Add Test Repository Object
+xswb_new#:#Add New Test Repository Object
+xswb_read#:#Read access to Test Repository Object
+xswb_write#:#Edit Test Repository Object
+xswb_delete#:#Delete Test Repository Object
+xswb_visible#:#Test Repository Object is visible
+xswb_edit_permission#:#Change permission settings
+crs_create_xswb#:#Create Test Repository Object
+grp_create_xswb#:#Create Test Repository Object
+fold_create_xswb#:#Create Test Repository Object
+root_create_xswb#:#Create Test Repository Object
+cat_create_xswb#:#Create Test Repository Object
 title#:#Title
 description#:#Description
 online#:#Online
@@ -43,6 +43,6 @@ lp_status#:#Learning Progress
 update_successful#:#Update Successful
 news_title#:#Title (en)
 news_content#:#Content (en)
-xsurwb_copy#:#Copy Test Repository Object
+xswb_copy#:#Copy Test Repository Object
 offline#:#Offline
 status#:#Status

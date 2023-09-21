@@ -62,7 +62,7 @@ class ilObjWhiteboardAccess extends ilObjectPluginAccess implements ilConditionH
         global $ilDB;
 
         $set = $ilDB->query(
-            "SELECT is_online FROM rep_robj_xsurwb_data " .
+            "SELECT is_online FROM rep_robj_xswb_data " .
             " WHERE id = " . $ilDB->quote($a_id, "integer")
         );
         $rec = $ilDB->fetchAssoc($set);
@@ -92,7 +92,7 @@ class ilObjWhiteboardAccess extends ilObjectPluginAccess implements ilConditionH
     ) : bool {
         $ref_ids = ilObject::_getAllReferences($a_trigger_obj_id);
         $ref_id = array_shift($ref_ids);
-        $object = new ilObjTestRepositoryObject($ref_id);
+        $object = new ilObjWhiteboard($ref_id);
         switch ($a_operator) {
             case ilConditionHandler::OPERATOR_PASSED:
                 return $object->getLPStatusForUser($a_usr_id) === ilLPStatus::LP_STATUS_COMPLETED_NUM;
