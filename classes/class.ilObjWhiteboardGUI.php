@@ -33,7 +33,7 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
             case "editProperties":   // list all commands that need write permission here
             case "updateProperties":
             case "saveProperties":
-            case "showContent":   // list all commands that need read permission here
+            case "":   // list all commands that need read permission here
             case "setStatusToCompleted":
             case "setStatusToFailed":
             case "setStatusToInProgress":
@@ -224,12 +224,7 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
         $i = new ilNonEditableValueGUI($this->plugin->txt("important"));
         $i->setInfo($this->plugin->txt("lp_status_info"));
         $form->addItem($i);
-        $idIlias = $this->getObject()->getId();
-        $tpl = new ilTemplate('text.html', true, true, "./Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render");
-        $tpl->setVariable("CONTENT", $idIlias);
-        //var_dump($tpl);
-        //exit;
-        $this->tpl->setContent($tpl->get());
+
 
 
     }
@@ -361,13 +356,15 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
 
        // $this->tpl->setOnScreenMessage("success", "El botón funciona del carajo", true);
         global $DIC;
+        $tpl = $DIC['tpl'];
 
-        $DIC->globalScreen()->layout()->meta()->addJs('Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render/templates/default/static/js/main.3f117116.js');
-        $DIC->globalScreen()->layout()->meta()->addCss('Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render/templates/default/static/css/main.409a98c6.css');
-        $tpl = new ilTemplate('index.html', true, true, "Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render");
+        $tpl->addJavaScript('Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render/templates/default/static/js/main.3f117116.js');
+        $tpl->addCss('Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render/templates/default/static/css/main.409a98c6.css');
+        $board = new ilTemplate('index.html', true, true, "Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render");
         $idIlias = $this->getObject()->getId();
-        $tpl->setVariable("CONTENT", $idIlias);
-        $this->tpl->setContent($tpl->get());
+        $board->setVariable("CONTENT", $idIlias);
+        $tpl->setContent($board->get());
+        //$this->tpl->setContent($tpl->get());
 
     }
 
