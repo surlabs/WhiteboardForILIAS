@@ -33,7 +33,7 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
             case "editProperties":   // list all commands that need write permission here
             case "updateProperties":
             case "saveProperties":
-            case "":   // list all commands that need read permission here
+            case "showContent":   // list all commands that need read permission here
             case "setStatusToCompleted":
             case "setStatusToFailed":
             case "setStatusToInProgress":
@@ -358,8 +358,9 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
         global $DIC;
         $tpl = $DIC['tpl'];
 
-        $tpl->addJavaScript('Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render/templates/default/static/js/main.3f117116.js');
-        $tpl->addCss('Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render/templates/default/static/css/main.409a98c6.css');
+
+        $tpl->addJavaScript('Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render/templates/default/assets/index-2e3e0401.js');
+        $tpl->addCss('Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render/templates/default/assets/index-b3bc617f.css');
         $board = new ilTemplate('index.html', true, true, "Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render");
         $idIlias = $this->getObject()->getId();
         $board->setVariable("CONTENT", $idIlias);
