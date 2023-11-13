@@ -124,4 +124,5 @@ class ilObjWhiteboard extends ilObjectPlugin implements ilLPStatusPluginInterfac
             return ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM;
         }
     }
+
 }

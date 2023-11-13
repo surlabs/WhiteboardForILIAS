@@ -160,7 +160,7 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
         $ilToolbar->addButton("Add News (Lang Var)", $ilCtrl->getLinkTarget($this, "addNewsLangVar"));
         $ilToolbar->addButton("Delete One", $ilCtrl->getLinkTarget($this, "deleteOneNews"));
         $ilToolbar->addButton("Update One", $ilCtrl->getLinkTarget($this, "updateOneNews"));
-        $ilToolbar->addButton("Open WhiteBoard", $ilCtrl->getLinkTarget($this, "hazAlgo"));
+        $ilToolbar->addButton("Open WhiteBoard", $ilCtrl->getLinkTarget($this, "openWhiteboard"));
 
         $this->tabs->activateTab("content");
 
@@ -351,22 +351,30 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
         $ilCtrl->redirect($this, "showContent");
     }
 
-    protected function hazAlgo() : void
+    protected function openWhiteboard() : void
     {
-
-       // $this->tpl->setOnScreenMessage("success", "El botón funciona del carajo", true);
         global $DIC;
         $tpl = $DIC['tpl'];
 
+        $tpl->addJavaScript('Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render/templates/default/whiteboard.js');
+        $tpl->addCss('Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render/templates/default/index.css');
 
-        $tpl->addJavaScript('Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render/templates/default/assets/index-2e3e0401.js');
-        $tpl->addCss('Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render/templates/default/assets/index-b3bc617f.css');
         $board = new ilTemplate('index.html', true, true, "Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render");
-        $idIlias = $this->getObject()->getId();
-        $board->setVariable("CONTENT", $idIlias);
-        $tpl->setContent($board->get());
-        //$this->tpl->setContent($tpl->get());
 
+        $idIlias = $this->getObject()->getId();
+        $userName = $DIC->user()->getFullname();
+
+        $board->setVariable("ROOM", $idIlias);
+        $board->setVariable("USERNAME", $userName);
+
+        $role = $this->isAdmin() ? "admin" : "user";
+        $board->setVariable("ROLE", $role);
+
+        $tpl->setContent($board->get());
+    }
+
+    protected function isAdmin(): bool{
+        return ($this->checkPermissionBool("redact") ||$this->checkPermissionBool("write"));
     }
 
 
