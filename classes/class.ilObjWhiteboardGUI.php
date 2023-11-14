@@ -1,5 +1,5 @@
 <?php
-
+use \ILIAS\UI\Component\Input\Container\Form\Standard;
 /**
  * @ilCtrl_isCalledBy ilObjWhiteboardGUI: ilRepositoryGUI, ilAdministrationGUI, ilObjPluginDispatchGUI
  * @ilCtrl_Calls      ilObjWhiteboardGUI: ilPermissionGUI, ilInfoScreenGUI, ilObjectCopyGUI, ilCommonActionDispatcherGUI, ilExportGUI
@@ -102,53 +102,79 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
      */
     protected function editProperties() : void
     {
+        global $DIC;
         $this->tabs->activateTab("properties");
         $form = $this->initPropertiesForm();
-        $this->addValuesToForm($form);
-        $this->tpl->setContent($form->getHTML());
+
+        $renderer = $DIC->ui()->renderer();
+        $this->tpl->setContent($renderer->render($form));
     }
 
-    protected function initPropertiesForm() : ilPropertyFormGUI
+    /**
+     * @throws ilCtrlException
+     */
+    protected function initPropertiesForm() : Standard
     {
-        $form = new ilPropertyFormGUI();
-        $form->setTitle($this->plugin->txt("obj_xswb"));
+        global $DIC;
+        $ui = $DIC->ui()->factory();
+        $lng = $DIC->language();
+        $ctrl = $DIC->ctrl();
 
-        $title = new ilTextInputGUI($this->plugin->txt("title"), "title");
-        $title->setRequired(true);
-        $form->addItem($title);
 
-        $description = new ilTextInputGUI($this->plugin->txt("description"), "description");
-        $form->addItem($description);
+        // Input field for title
+        $title = $ui->input()->field()->text($lng->txt("title"))
+            ->withRequired(true)
+            ->withValue($this->object->getTitle());
 
-        $online = new ilCheckboxInputGUI($this->plugin->txt("online"), "online");
-        $form->addItem($online);
+        // Input field for description
+        $description = $ui->input()->field()->textarea($lng->txt("description"))->withValue($this->object->getDescription());
+        $permission = $ui->input()->field()->radio($this->plugin->txt("default_permissions"))
+            ->withRequired(true)
+            ->withOption('all_read', $this->plugin->txt('all_read'))
+            ->withOption('all_write', $this->plugin->txt('all_write'))
+            ->withValue($this->object->isAllRead() ? 'all_read' : 'all_write');
 
-        $form->setFormAction($this->ctrl->getFormAction($this, "saveProperties"));
-        $form->addCommandButton("saveProperties", $this->plugin->txt("update"));
+        // Checkbox for online
+        $online = $ui->input()->field()->checkbox($lng->txt("online"))->withValue($this->object->isOnline());
 
+        // Construct the form with form fields
+        $form_action = $ctrl->getFormAction($this, "saveProperties");
+        $form_fields = ['title' => $title, 'description' => $description, 'default_permissions'=>$permission, 'online' => $online];
+        $form = $ui->input()->container()->form()->standard($form_action, $form_fields);
+
+        // Command button
+        //$form = $form->withAdditionalTransformation($ui->input()->container()->form()->transformation()->commandButton($form_action, $lng->txt("update")));
         return $form;
     }
 
-    protected function addValuesToForm(ilPropertyFormGUI $form) : void
-    {
-        $form->setValuesByArray(array(
-            "title" => $this->object->getTitle(),
-            "description" => $this->object->getDescription(),
-            "online" => $this->object->isOnline(),
-        ));
-    }
 
+    /**
+     * @throws ilCtrlException
+     */
     protected function saveProperties() : void
     {
+        GLOBAL $DIC;
+        $request = $DIC->http()->request();
         $form = $this->initPropertiesForm();
-        $form->setValuesByPost();
-        if ($form->checkInput()) {
-            $this->fillObject($this->object, $form);
+
+        if ($request->getMethod() == "POST") {
+            $form = $form->withRequest($request);
+            $result = $form->getData();
+            $this->fillObject($this->object, $result);
             $this->object->update();
             $this->tpl->setOnScreenMessage("success", $this->plugin->txt("update_successful"), true);
             $this->ctrl->redirect($this, "editProperties");
         }
-        $this->tpl->setContent($form->getHTML());
+     /*   var_dump($result);
+        exit;
+
+
+        $form->setValuesByPost();
+        if ($form->checkInput()) {
+
+
+        }
+        $this->tpl->setContent($form->getHTML());*/
     }
 
     protected function showContent() : void
@@ -229,11 +255,11 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
 
     }
 
-    private function fillObject(ilObjWhiteboard $object, ilPropertyFormGUI $form) : void
+    private function fillObject(ilObject $object, Array $form) : void
     {
-        $object->setTitle($form->getInput('title'));
-        $object->setDescription($form->getInput('description'));
-        $object->setOnline($form->getInput('online'));
+        $object->setTitle($form["title"]);
+        $object->setDescription($form["description"]);
+        $object->setOnline($form["online"]);
     }
 
     /**

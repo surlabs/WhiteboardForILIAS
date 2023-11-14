@@ -1,5 +1,5 @@
-obj_xswb#:#Test Repository Object
-objs_xswb#:#Test Repository Objects
+obj_xswb#:#Whiteboard Room
+objs_xswb#:#Whiteboard Rooms
 obj_xswb_duplicate#:#Copy
 objs_xswb_duplicate#:#Copy Test Repository Objects
 obj_xswb_select#:#Select Test Repository Object
@@ -17,6 +17,9 @@ root_create_xswb#:#Create Test Repository Object
 cat_create_xswb#:#Create Test Repository Object
 title#:#Title
 description#:#Description
+default_permissions#:#Default permissions
+all_write#:#All users can edit
+all_read#:#All users can read
 online#:#Online
 save#:#Save
 update#:#Update

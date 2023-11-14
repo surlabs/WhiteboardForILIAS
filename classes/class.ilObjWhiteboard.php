@@ -20,6 +20,8 @@ class ilObjWhiteboard extends ilObjectPlugin implements ilLPStatusPluginInterfac
 {
     protected bool $online = false;
 
+    protected bool $all_read = false;
+
     public function __construct($a_ref_id = 0)
     {
         parent::__construct($a_ref_id);
@@ -36,11 +38,11 @@ class ilObjWhiteboard extends ilObjectPlugin implements ilLPStatusPluginInterfac
 
         $ilDB->manipulate(
             "INSERT INTO rep_robj_xswb_data " .
-            "(id, is_online, option_one, option_two) VALUES (" .
+            "(id, is_online, all_read) VALUES (" .
             $ilDB->quote($this->getId(), "integer") . "," .
             $ilDB->quote(0, "integer") . "," .
-            $ilDB->quote("default 1", "text") . "," .
-            $ilDB->quote("default 2", "text") .
+            $ilDB->quote(0, "integer") .
+
             ")"
         );
     }
@@ -65,6 +67,7 @@ class ilObjWhiteboard extends ilObjectPlugin implements ilLPStatusPluginInterfac
         $ilDB->manipulate(
             $up = "UPDATE rep_robj_xswb_data SET " .
                 " is_online = " . $ilDB->quote($this->isOnline(), "integer") .
+                ", all_read = " . $ilDB->quote($this->isAllRead(), "integer") .
                 " WHERE id = " . $ilDB->quote($this->getId(), "integer")
         );
     }
@@ -93,6 +96,16 @@ class ilObjWhiteboard extends ilObjectPlugin implements ilLPStatusPluginInterfac
     public function isOnline() : bool
     {
         return $this->online;
+    }
+
+    public function setAllRead() : bool
+    {
+        return $this->all_read;
+    }
+
+    public function isAllRead() : bool
+    {
+        return $this->all_read;
     }
 
     public function getLPCompleted() : array
