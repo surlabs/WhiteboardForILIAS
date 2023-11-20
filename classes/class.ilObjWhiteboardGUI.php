@@ -182,12 +182,8 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
         global $ilToolbar, $ilCtrl;
 
         /** @var ilToolbarGUI $ilToolbar */
-        $ilToolbar->addButton("Add News", $ilCtrl->getLinkTarget($this, "addNews"));
-        $ilToolbar->addButton("Add News (Lang Var)", $ilCtrl->getLinkTarget($this, "addNewsLangVar"));
-        $ilToolbar->addButton("Delete One", $ilCtrl->getLinkTarget($this, "deleteOneNews"));
-        $ilToolbar->addButton("Update One", $ilCtrl->getLinkTarget($this, "updateOneNews"));
-        $ilToolbar->addButton("Open WhiteBoard", $ilCtrl->getLinkTarget($this, "openWhiteboard"));
-
+        $ilToolbar->addButton("Open WhiteBoard Room", $ilCtrl->getLinkTarget($this, "openWhiteboard"));
+        
         $this->tabs->activateTab("content");
 
         /** @var ilObjWhiteboard $object */
@@ -260,6 +256,7 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
         $object->setTitle($form["title"]);
         $object->setDescription($form["description"]);
         $object->setOnline($form["online"]);
+        $object->setAllRead($form["default_permissions"] == "all_read");
     }
 
     /**
@@ -304,78 +301,6 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
         $this->setStatusAndRedirect(ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM);
     }
 
-
-    //
-    // News for plugin
-    //
-
-    protected function addNews() : void
-    {
-        global $ilCtrl, $DIC;
-
-        $ns = $DIC->news();
-
-        $context = $ns->contextForRefId($this->object->getRefId());
-        $item = $ns->item($context);
-        $item->setTitle("Hello World");
-        $item->setContent("This is the news.");
-        $ns->data()->save($item);
-
-        $this->tpl->setOnScreenMessage("info", "News created", true);
-        $ilCtrl->redirect($this, "showContent");
-    }
-
-    protected function addNewsLangVar() : void
-    {
-        global $ilCtrl, $DIC;
-
-        $ns = $DIC->news();
-
-        $context = $ns->contextForRefId($this->object->getRefId());
-        $item = $ns->item($context);
-        $item->setTitle("news_title");
-        $item->setContentTextIsLangVar(true);
-        $item->setContentIsLangVar(true);
-        $item->setContent("news_content");
-        $ns->data()->save($item);
-
-        $this->tpl->setOnScreenMessage("info", "News created", true);
-        $ilCtrl->redirect($this, "showContent");
-    }
-
-    protected function deleteOneNews() : void
-    {
-        global $ilCtrl, $DIC;
-
-        $ns = $DIC->news();
-
-        $context = $ns->contextForRefId($this->object->getRefId());
-        $items = $ns->data()->getNewsOfContext($context);
-        if ($n = current($items)) {
-            $ns->data()->delete($n);
-            $this->tpl->setOnScreenMessage("info", "News deleted", true);
-        }
-
-        $ilCtrl->redirect($this, "showContent");
-    }
-
-    protected function updateOneNews() : void
-    {
-        global $ilCtrl, $DIC;
-
-        $ns = $DIC->news();
-
-        $context = $ns->contextForRefId($this->object->getRefId());
-        $items = $ns->data()->getNewsOfContext($context);
-        if ($n = current($items)) {
-            $n->setContent("News content changed at " . date("d.m.Y H:m:s"));
-            $n->setContentTextIsLangVar(false);
-            $ns->data()->save($n);
-            $this->tpl->setOnScreenMessage("info", "News updated", true);
-        }
-
-        $ilCtrl->redirect($this, "showContent");
-    }
 
     protected function openWhiteboard() : void
     {

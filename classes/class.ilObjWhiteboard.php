@@ -57,13 +57,13 @@ class ilObjWhiteboard extends ilObjectPlugin implements ilLPStatusPluginInterfac
         );
         while ($rec = $ilDB->fetchAssoc($set)) {
             $this->setOnline($rec["is_online"]);
+            $this->setAllRead($rec["all_read"]);
         }
     }
 
     protected function doUpdate() : void
     {
         global $ilDB;
-
         $ilDB->manipulate(
             $up = "UPDATE rep_robj_xswb_data SET " .
                 " is_online = " . $ilDB->quote($this->isOnline(), "integer") .
@@ -98,9 +98,9 @@ class ilObjWhiteboard extends ilObjectPlugin implements ilLPStatusPluginInterfac
         return $this->online;
     }
 
-    public function setAllRead() : bool
+    public function setAllRead(bool $p_val) : void
     {
-        return $this->all_read;
+        $this->all_read = $p_val;
     }
 
     public function isAllRead() : bool
