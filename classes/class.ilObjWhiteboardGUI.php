@@ -33,11 +33,6 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
             case "editProperties":   // list all commands that need write permission here
             case "updateProperties":
             case "saveProperties":
-            case "showContent":   // list all commands that need read permission here
-            case "setStatusToCompleted":
-            case "setStatusToFailed":
-            case "setStatusToInProgress":
-            case "setStatusToNotAttempted":
             default:
                 $this->checkPermission("read");
                 $this->$cmd();
@@ -89,9 +84,6 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
             );
         }
 
-        // standard export tab
-        $this->addExportTab();
-
         // standard permission tab
         $this->addPermissionTab();
         $this->activateTab();
@@ -142,8 +134,6 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
         $form_fields = ['title' => $title, 'description' => $description, 'default_permissions'=>$permission, 'online' => $online];
         $form = $ui->input()->container()->form()->standard($form_action, $form_fields);
 
-        // Command button
-        //$form = $form->withAdditionalTransformation($ui->input()->container()->form()->transformation()->commandButton($form_action, $lng->txt("update")));
         return $form;
     }
 
@@ -165,90 +155,6 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
             $this->tpl->setOnScreenMessage("success", $this->plugin->txt("update_successful"), true);
             $this->ctrl->redirect($this, "editProperties");
         }
-     /*   var_dump($result);
-        exit;
-
-
-        $form->setValuesByPost();
-        if ($form->checkInput()) {
-
-
-        }
-        $this->tpl->setContent($form->getHTML());*/
-    }
-
-    protected function showContent() : void
-    {
-        global $ilToolbar, $ilCtrl;
-
-        /** @var ilToolbarGUI $ilToolbar */
-        $ilToolbar->addButton("Open WhiteBoard Room", $ilCtrl->getLinkTarget($this, "openWhiteboard"));
-        
-        $this->tabs->activateTab("content");
-
-        /** @var ilObjWhiteboard $object */
-        $object = $this->object;
-
-        $form = new ilPropertyFormGUI();
-        $form->setTitle($object->getTitle());
-
-        $i = new ilNonEditableValueGUI($this->plugin->txt("title"));
-        $i->setInfo($object->getTitle());
-        $form->addItem($i);
-
-        $i = new ilNonEditableValueGUI($this->plugin->txt("description"));
-        $i->setInfo($object->getDescription());
-        $form->addItem($i);
-
-        $i = new ilNonEditableValueGUI($this->plugin->txt("online_status"));
-        $i->setInfo($object->isOnline() ? "Online" : "Offline");
-        $form->addItem($i);
-
-        global $ilUser;
-        $progress = new ilLPStatusPlugin($this->object->getId());
-        $status = $progress->determineStatus($this->object->getId(), $ilUser->getId());
-        $i = new ilNonEditableValueGUI($this->plugin->txt("lp_status"));
-        $i->setInfo($this->plugin->txt("lp_status_" . $status));
-        $form->addItem($i);
-
-        $i = new ilNonEditableValueGUI();
-        $i->setInfo(
-            "<a href='" . $this->ctrl->getLinkTarget($this, "setStatusToCompleted") . "'> " . $this->plugin->txt(
-                "set_completed"
-            )
-        );
-        $form->addItem($i);
-
-        $i = new ilNonEditableValueGUI();
-        $i->setInfo(
-            "<a href='" . $this->ctrl->getLinkTarget($this, "setStatusToNotAttempted") . "'> " . $this->plugin->txt(
-                "set_not_attempted"
-            )
-        );
-        $form->addItem($i);
-
-        $i = new ilNonEditableValueGUI();
-        $i->setInfo(
-            "<a href='" . $this->ctrl->getLinkTarget($this, "setStatusToFailed") . "'> " . $this->plugin->txt(
-                "set_failed"
-            )
-        );
-        $form->addItem($i);
-
-        $i = new ilNonEditableValueGUI();
-        $i->setInfo(
-            "<a href='" . $this->ctrl->getLinkTarget($this, "setStatusToInProgress") . "'> " . $this->plugin->txt(
-                "set_in_progress"
-            )
-        );
-        $form->addItem($i);
-
-        $i = new ilNonEditableValueGUI($this->plugin->txt("important"));
-        $i->setInfo($this->plugin->txt("lp_status_info"));
-        $form->addItem($i);
-
-
-
     }
 
     private function fillObject(ilObject $object, Array $form) : void
@@ -266,62 +172,34 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
     {
         $next_class = $this->ctrl->getCmdClass();
 
-        switch ($next_class) {
-            case 'ilexportgui':
-                $this->tabs->activateTab("export");
-                break;
-        }
     }
 
-    private function setStatusToCompleted() : void
-    {
-        $this->setStatusAndRedirect(ilLPStatus::LP_STATUS_COMPLETED_NUM);
-    }
-
-    private function setStatusAndRedirect(int $status) : void
-    {
-        global $ilUser;
-        $_SESSION[self::LP_SESSION_ID] = $status;
-        ilLPStatusWrapper::_updateStatus($this->object->getId(), $ilUser->getId());
-        $this->ctrl->redirect($this, $this->getStandardCmd());
-    }
-
-    protected function setStatusToFailed() : void
-    {
-        $this->setStatusAndRedirect(ilLPStatus::LP_STATUS_FAILED_NUM);
-    }
-
-    protected function setStatusToInProgress() : void
-    {
-        $this->setStatusAndRedirect(ilLPStatus::LP_STATUS_IN_PROGRESS_NUM);
-    }
-
-    protected function setStatusToNotAttempted() : void
-    {
-        $this->setStatusAndRedirect(ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM);
-    }
-
-
-    protected function openWhiteboard() : void
+    protected function showContent() : void
     {
         global $DIC;
         $tpl = $DIC['tpl'];
+        $this->tabs->activateTab("content");
 
-        $tpl->addJavaScript('Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render/templates/default/whiteboard.js');
-        $tpl->addCss('Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render/templates/default/index.css');
+        /** @var ilObjWhiteboard $object */
+        $object = $this->object;
+        $tpl->addJavaScript('Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render/templates/default/index.js');
+        //$tpl->addCss('Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render/templates/default/whiteboard.css');
 
         $board = new ilTemplate('index.html', true, true, "Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render");
 
         $idIlias = $this->getObject()->getId();
         $userName = $DIC->user()->getFullname();
+        $allRead = $object->isAllRead() ? "true" : "false";
 
         $board->setVariable("ROOM", $idIlias);
         $board->setVariable("USERNAME", $userName);
+        $board->setVariable("ALLREAD", $allRead);
 
         $role = $this->isAdmin() ? "admin" : "user";
         $board->setVariable("ROLE", $role);
 
         $tpl->setContent($board->get());
+
     }
 
     protected function isAdmin(): bool{
