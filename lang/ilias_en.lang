@@ -3,18 +3,18 @@ objs_xswb#:#Whiteboard Rooms
 obj_xswb_duplicate#:#Copy
 objs_xswb_duplicate#:#Copy Test Repository Objects
 obj_xswb_select#:#Select Test Repository Object
-xswb_add#:#Add Test Repository Object
-xswb_new#:#Add New Test Repository Object
-xswb_read#:#Read access to Test Repository Object
-xswb_write#:#Edit Test Repository Object
-xswb_delete#:#Delete Test Repository Object
-xswb_visible#:#Test Repository Object is visible
+xswb_add#:#Add Whiteboard
+xswb_new#:#Add New Whiteboard
+xswb_read#:#Read access to Whiteboard
+xswb_write#:#Edit Whiteboard
+xswb_delete#:#Delete Whiteboard
+xswb_visible#:#Whiteboard is visible
 xswb_edit_permission#:#Change permission settings
-crs_create_xswb#:#Create Test Repository Object
-grp_create_xswb#:#Create Test Repository Object
-fold_create_xswb#:#Create Test Repository Object
-root_create_xswb#:#Create Test Repository Object
-cat_create_xswb#:#Create Test Repository Object
+crs_create_xswb#:#Create Whiteboard Object
+grp_create_xswb#:#Create Whiteboard Object
+fold_create_xswb#:#Create Whiteboard Object
+root_create_xswb#:#Create Whiteboard Object
+cat_create_xswb#:#Create Whiteboard Object
 title#:#Title
 description#:#Description
 default_permissions#:#Default permissions
@@ -28,17 +28,6 @@ content#:#Content
 copy#:#Copy
 edit#:#Edit
 export#:#Export
-set_not_attempted#:#Set LP Status to not attempted
-set_in_progress#:#Set LP Status to in progress
-set_passed#:#Set LP Status to not completed
-set_failed#:#Set LP Status to not failed
-set_completed#:#Set LP Status to completed
-lp_status_0#:#Not Attempted
-lp_status_1#:#In Progress
-lp_status_2#:#Completed
-lp_status_3#:#Failed
-lp_status_#:#No state yet.
-lp_status_info#:#Attention: Setting the LP Status will set the LP status of the currently logged in user to the chosen status. THE STATUS OF EVERY OTHER USER WILL BE SET TO NOT ATTEMPTED! You will find this repository object by searching for its title, its description or the expression "Repoplugin".
 offline:#:Offline
 important#:#Important
 online_status#:#Online Status
@@ -49,3 +38,10 @@ news_content#:#Content (en)
 xswb_copy#:#Copy Test Repository Object
 offline#:#Offline
 status#:#Status
+settings#:#Whiteboard Settings
+websocket_url#:#Websocket URL
+info_websocket_url#:#The Websocket URL is used to connect to the Websocket server. This is necessary for the collaborative whiteboard.
+info_config_saved#:#The configuration has been saved.
+room_full#:#The whiteboard room is full.
+open_other_tab#:#You have already opened this room in another window.
+websocket_error#:#The Websocket server could not be reached. Please, contact your system administrator.

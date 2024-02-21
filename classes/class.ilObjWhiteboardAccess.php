@@ -66,7 +66,11 @@ class ilObjWhiteboardAccess extends ilObjectPluginAccess implements ilConditionH
             " WHERE id = " . $ilDB->quote($a_id, "integer")
         );
         $rec = $ilDB->fetchAssoc($set);
-        return (boolean) $rec["is_online"];
+        if(isset($rec) && isset($rec["is_online"])){
+            return (boolean) $rec["is_online"];
+        } else {
+            return false;
+        }
     }
 
     /**

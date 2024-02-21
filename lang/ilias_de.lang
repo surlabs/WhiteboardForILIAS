@@ -1,20 +1,20 @@
 obj_xswb#:#Test Whiteboard-Raum
 objs_xswb#:#Test Whiteboard-Räume
 obj_xswb_duplicate#:#Kopieren
-objs_xswb_duplicate#:#Kopiere Test Repository Objects
-obj_xswb_select#:#Wähle Test Repository Object
-xswb_add#:#Test Repository Object hinzufügen
-xswb_new#:#Neues Test Repository Object
-xswb_read#:#Lesezugriff auf Test Repository Object
-xswb_write#:#Test Repository Object bearbeiten
-xswb_delete#:#Test Repository Object löschen
-xswb_visible#:#Test Repository Object ist sichtbar
+objs_xswb_duplicate#:#Kopiere Whiteboard
+obj_xswb_select#:#Wähle Whiteboard
+xswb_add#:#Whiteboard hinzufügen
+xswb_new#:#Neues Whiteboard
+xswb_read#:#Lesezugriff auf Whiteboard
+xswb_write#:#Whiteboard bearbeiten
+xswb_delete#:#Whiteboard löschen
+xswb_visible#:#Whiteboard ist sichtbar
 xswb_edit_permission#:#Zugriffsrecht bearbeiten
-crs_create_xswb#:#Erstelle Test Repository Object
-grp_create_xswb#:#Erstelle Test Repository Object
-fold_create_xswb#:#Erstelle Test Repository Object
-root_create_xswb#:#Erstelle Test Repository Object
-cat_create_xswb#:#Erstelle Test Repository Object
+crs_create_xswb#:#Erstelle Whiteboard
+grp_create_xswb#:#Erstelle Whiteboard
+fold_create_xswb#:#Erstelle Whiteboard
+root_create_xswb#:#Erstelle Whiteboard
+cat_create_xswb#:#Erstelle Whiteboard
 title#:#Titel
 description#:#Beschreibung
 default_permissions#:#Standardberechtigungen
@@ -28,17 +28,6 @@ content#:#Inhalt
 copy#:#Kopieren
 edit#:#Bearbeiten
 export#:#Export
-set_not_attempted#:#Setze Lernfortschritt auf "Nicht Versucht"
-set_in_progress#:#Setze Lernfortschritt auf "In Bearbeitung"
-set_passed#:#Setze Lernfortschritt auf "Bestanden"
-set_failed#:#Setze Lernfortschritt auf "Nicht Bestanden"
-set_completed#:#Setze Lernfortschritt auf "Durchgeführt"
-lp_status_0#:#Nicht Versucht
-lp_status_1#:#In Bearbeitung
-lp_status_2#:#Durchgeführt
-lp_status_3#:#Nicht Bestanden
-lp_status_#:#Kein Status gesetzt.
-lp_status_info#:#Achtung, wenn Sie den Lernfortschritt ändern so wird der Lernfortschritt für diesen Benutzer bearbeitet UND alle anderen Benutzer auf "Nicht Teilgenommen" gesetzt! Mit der Lucenesuche wird dieses Objekt gefunden, wenn man nach dem Titel, der Beschreibung oder dem Begriff "Repoplugin" sucht.
 offline:#:Offline
 important#:#Wichtig
 online_status#:#Online Status
@@ -46,6 +35,13 @@ lp_status#:#Lernfortschritt
 update_successful#:Die Änderungen wurden gespeichert.
 news_title#:#Titel (en)
 news_content#:#Inhalt (en)
-xswb_copy#:#Test Repository Object kopieren
+xswb_copy#:#Whiteboard kopieren
 offline#:#Offline
 status#:#Status
+settings#:#Einstellungen
+info_websocket_url#:#Websocket URL
+info_websocket_url_info#:#Die Websocket URL wird benötigt, um die Whiteboard-App zu starten.
+info_config_saved#:#Die Konfiguration wurde gespeichert.
+room_full#:#Der Whiteboard-Raum ist voll.
+open_other_tab#:#In einem anderen Tab öffnen.
+websocket_error#:#Websocket-Verbindung fehlgeschlagen.

@@ -10,6 +10,7 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
     protected ilCtrl $ctrl;
     protected ilTabsGUI $tabs;
     public ilGlobalTemplateInterface $tpl;
+    protected ilWhiteboardConfig $config;
 
     protected function afterConstructor() : void
     {
@@ -177,6 +178,7 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
     protected function showContent() : void
     {
         global $DIC;
+        $config = new ilWhiteboardConfig();
         $tpl = $DIC['tpl'];
         $this->tabs->activateTab("content");
 
@@ -197,6 +199,14 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
 
         $role = $this->isAdmin() ? "admin" : "user";
         $board->setVariable("ROLE", $role);
+
+        $board->setVariable("WEBSOCKETURL", $config->getWebsocket());
+
+        $board->setVariable("ROOMFULL", $this->object->txt("room_full"));
+
+        $board->setVariable("ALREADYACCESSED", $this->object->txt("open_other_tab"));
+
+        $board->setVariable("WEBSOCKETERROR", $this->object->txt("websocket_error"));
 
         $tpl->setContent($board->get());
 
