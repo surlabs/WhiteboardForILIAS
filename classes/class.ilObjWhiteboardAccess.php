@@ -1,43 +1,31 @@
 <?php
+declare(strict_types=1);
 
-/**
- * This file is part of ILIAS, a powerful learning management system
- * published by ILIAS open source e-Learning e.V.
+/*
+ *  This file is part of the Whiteboard Repository Object plugin for ILIAS, a collaborative online whiteboard tool,
+ *  developed by SURLABS with funding from the University of Freiburg.
  *
- * ILIAS is licensed with the GPL-3.0,
- * see https://www.gnu.org/licenses/gpl-3.0.en.html
- * You should have received a copy of said license along with the
- * source code, too.
+ *  This plugin is freely distributed under the terms of the GNU General Public License version 3 (GPL-3.0),
+ *  a copy of which is available at https://www.gnu.org/licenses/gpl-3.0.en.html. This license allows for the free use,
+ *  modification, and distribution of this software, ensuring it remains open-source and accessible to the community.
  *
- * If this is not the case or you just want to try ILIAS, you'll find
- * us at:
- * https://www.ilias.de
- * https://github.com/ILIAS-eLearning
+ *  The Whiteboard plugin uses a version the tldraw library, which is also open-source and distributed under its specific
+ *  terms and conditions. For details on the tldraw license, please refer to https://github.com/tldraw/tldraw/blob/main/LICENSE.md.
  *
- *********************************************************************/
-
-/**
- * Please do not create instances of large application classes
- * Write small methods within this class to determine the status.
- * @author                    Alex Killing <alex.killing@gmx.de>
- * @author                    Oskar Truffer <ot@studer-raimann.ch>
+ *  DISCLAIMER: The developers, contributors, and funding entities associated with the Whiteboard plugin or the tldraw library
+ *  assume no responsibility for any damages or losses incurred from the use of this software. Users are encouraged to review
+ *  the license agreements and comply with the terms and conditions set forth.
+ *
+ *  Community involvement is welcome. To report bugs, suggest improvements, or participate in discussions,
+ *  please visit the Mantis system and search for ILIAS Plugins under the "Whiteboard" category at https://mantis.ilias.de.
+ *
+ *  For further information, documentation, and the source code, visit our GitHub repository at
+ *  https://github.com/surlabs/Whiteboard.
  */
 class ilObjWhiteboardAccess extends ilObjectPluginAccess implements ilConditionHandling
 {
 
-    /**
-     * Checks whether a user may invoke a command or not
-     * (this method is called by ilAccessHandler::checkAccess)
-     * Please do not check any preconditions handled by
-     * ilConditionHandler here. Also don't do usual RBAC checks.
-     * @param string $cmd        command (not permission!)
-     * @param string $permission permission
-     * @param int    $ref_id     reference id
-     * @param int    $obj_id     object id
-     * @param int    $user_id    user id (default is current user)
-     * @return bool true, if everything is ok
-     */
-    public function _checkAccess(string $cmd, string $permission, int $ref_id, int $obj_id, ?int $user_id = null) : bool
+    public function _checkAccess(string $cmd, string $permission, int $ref_id, int $obj_id, ?int $user_id = null): bool
     {
         global $ilUser, $ilAccess;
 
@@ -57,26 +45,22 @@ class ilObjWhiteboardAccess extends ilObjectPluginAccess implements ilConditionH
         return true;
     }
 
-    public static function checkOnline(int $a_id) : bool
+    public static function checkOnline(int $a_id): bool
     {
         global $ilDB;
-
         $set = $ilDB->query(
             "SELECT is_online FROM rep_robj_xswb_data " .
             " WHERE id = " . $ilDB->quote($a_id, "integer")
         );
         $rec = $ilDB->fetchAssoc($set);
-        if(isset($rec) && isset($rec["is_online"])){
-            return (boolean) $rec["is_online"];
+        if (isset($rec) && isset($rec["is_online"])) {
+            return (boolean)$rec["is_online"];
         } else {
             return false;
         }
     }
 
-    /**
-     * Returns an array with valid operators for the specific object type
-     */
-    public static function getConditionOperators() : array
+    public static function getConditionOperators(): array
     {
         include_once './Services/Conditions/classes/class.ilConditionHandler.php'; //bugfix mantis 24891
         return array(
@@ -85,15 +69,13 @@ class ilObjWhiteboardAccess extends ilObjectPluginAccess implements ilConditionH
         );
     }
 
-    /**
-     * check condition for a specific user and object
-     */
     public static function checkCondition(
-        int $a_trigger_obj_id,
+        int    $a_trigger_obj_id,
         string $a_operator,
         string $a_value,
-        int $a_usr_id
-    ) : bool {
+        int    $a_usr_id
+    ): bool
+    {
         $ref_ids = ilObject::_getAllReferences($a_trigger_obj_id);
         $ref_id = array_shift($ref_ids);
         $object = new ilObjWhiteboard($ref_id);

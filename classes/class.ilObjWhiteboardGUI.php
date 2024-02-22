@@ -1,18 +1,42 @@
 <?php
+declare(strict_types=1);
+
 use \ILIAS\UI\Component\Input\Container\Form\Standard;
+
+/*
+ *  This file is part of the Whiteboard Repository Object plugin for ILIAS, a collaborative online whiteboard tool,
+ *  developed by SURLABS with funding from the University of Freiburg.
+ *
+ *  This plugin is freely distributed under the terms of the GNU General Public License version 3 (GPL-3.0),
+ *  a copy of which is available at https://www.gnu.org/licenses/gpl-3.0.en.html. This license allows for the free use,
+ *  modification, and distribution of this software, ensuring it remains open-source and accessible to the community.
+ *
+ *  The Whiteboard plugin uses a version the tldraw library, which is also open-source and distributed under its specific
+ *  terms and conditions. For details on the tldraw license, please refer to https://github.com/tldraw/tldraw/blob/main/LICENSE.md.
+ *
+ *  DISCLAIMER: The developers, contributors, and funding entities associated with the Whiteboard plugin or the tldraw library
+ *  assume no responsibility for any damages or losses incurred from the use of this software. Users are encouraged to review
+ *  the license agreements and comply with the terms and conditions set forth.
+ *
+ *  Community involvement is welcome. To report bugs, suggest improvements, or participate in discussions,
+ *  please visit the Mantis system and search for ILIAS Plugins under the "Whiteboard" category at https://mantis.ilias.de.
+ *
+ *  For further information, documentation, and the source code, visit our GitHub repository at
+ *  https://github.com/surlabs/Whiteboard.
+ */
+
 /**
  * @ilCtrl_isCalledBy ilObjWhiteboardGUI: ilRepositoryGUI, ilAdministrationGUI, ilObjPluginDispatchGUI
  * @ilCtrl_Calls      ilObjWhiteboardGUI: ilPermissionGUI, ilInfoScreenGUI, ilObjectCopyGUI, ilCommonActionDispatcherGUI, ilExportGUI
  */
 class ilObjWhiteboardGUI extends ilObjectPluginGUI
 {
-    public const LP_SESSION_ID = 'xswb_lp_session_state';
     protected ilCtrl $ctrl;
     protected ilTabsGUI $tabs;
     public ilGlobalTemplateInterface $tpl;
     protected ilWhiteboardConfig $config;
 
-    protected function afterConstructor() : void
+    protected function afterConstructor(): void
     {
         global $ilCtrl, $ilTabs, $tpl;
         $this->ctrl = $ilCtrl;
@@ -20,20 +44,21 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
         $this->tpl = $tpl;
     }
 
-    final public function getType() : string
+    final public function getType(): string
     {
         return ilWhiteboardPlugin::ID;
     }
 
-    /**
-     * Handles all commmands of this class, centralizes permission checks
-     */
-    public function performCommand(string $cmd) : void
+    public function performCommand(string $cmd): void
     {
         switch ($cmd) {
-            case "editProperties":   // list all commands that need write permission here
+            case "editProperties":
             case "updateProperties":
             case "saveProperties":
+                $this->checkPermission("write");
+                $this->$cmd();
+                break;
+            case "showContent":
             default:
                 $this->checkPermission("read");
                 $this->$cmd();
@@ -41,42 +66,26 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
         }
     }
 
-    /**
-     * After object has been created -> jump to this command
-     */
-    function getAfterCreationCmd() : string
+    function getAfterCreationCmd(): string
     {
         return "editProperties";
     }
 
-    /**
-     * Get standard command
-     */
-    function getStandardCmd() : string
+    function getStandardCmd(): string
     {
         return "showContent";
     }
 
-//
-// DISPLAY TABS
-//
-
-    /**
-     * Set tabs
-     */
-    protected function setTabs() : void
+    protected function setTabs(): void
     {
         global $ilCtrl, $ilAccess;
 
-        // tab for the "show content" command
         if ($ilAccess->checkAccess("read", "", $this->object->getRefId())) {
             $this->tabs->addTab("content", $this->txt("content"), $ilCtrl->getLinkTarget($this, "showContent"));
         }
 
-        // standard info screen tab
         $this->addInfoTab();
 
-        // a "properties" tab
         if ($ilAccess->checkAccess("write", "", $this->object->getRefId())) {
             $this->tabs->addTab(
                 "properties",
@@ -85,15 +94,15 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
             );
         }
 
-        // standard permission tab
         $this->addPermissionTab();
         $this->activateTab();
     }
 
     /**
      * Edit Properties. This commands uses the form class to display an input form.
+     * @throws ilCtrlException
      */
-    protected function editProperties() : void
+    protected function editProperties(): void
     {
         global $DIC;
         $this->tabs->activateTab("properties");
@@ -106,20 +115,17 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
     /**
      * @throws ilCtrlException
      */
-    protected function initPropertiesForm() : Standard
+    protected function initPropertiesForm(): Standard
     {
         global $DIC;
         $ui = $DIC->ui()->factory();
         $lng = $DIC->language();
         $ctrl = $DIC->ctrl();
 
-
-        // Input field for title
         $title = $ui->input()->field()->text($lng->txt("title"))
             ->withRequired(true)
             ->withValue($this->object->getTitle());
 
-        // Input field for description
         $description = $ui->input()->field()->textarea($lng->txt("description"))->withValue($this->object->getDescription());
         $permission = $ui->input()->field()->radio($this->plugin->txt("default_permissions"))
             ->withRequired(true)
@@ -127,12 +133,10 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
             ->withOption('all_write', $this->plugin->txt('all_write'))
             ->withValue($this->object->isAllRead() ? 'all_read' : 'all_write');
 
-        // Checkbox for online
         $online = $ui->input()->field()->checkbox($lng->txt("online"))->withValue($this->object->isOnline());
 
-        // Construct the form with form fields
         $form_action = $ctrl->getFormAction($this, "saveProperties");
-        $form_fields = ['title' => $title, 'description' => $description, 'default_permissions'=>$permission, 'online' => $online];
+        $form_fields = ['title' => $title, 'description' => $description, 'default_permissions' => $permission, 'online' => $online];
         return $ui->input()->container()->form()->standard($form_action, $form_fields);
     }
 
@@ -140,9 +144,9 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
     /**
      * @throws ilCtrlException
      */
-    protected function saveProperties() : void
+    protected function saveProperties(): void
     {
-        GLOBAL $DIC;
+        global $DIC;
         $request = $DIC->http()->request();
         $form = $this->initPropertiesForm();
 
@@ -156,7 +160,7 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
         }
     }
 
-    private function fillObject(ilObject $object, Array $form) : void
+    private function fillObject(ilObject $object, array $form): void
     {
         $object->setTitle($form["title"]);
         $object->setDescription($form["description"]);
@@ -167,13 +171,12 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
     /**
      * We need this method if we can't access the tabs otherwise...
      */
-    private function activateTab() : void
+    private function activateTab(): void
     {
         $next_class = $this->ctrl->getCmdClass();
-
     }
 
-    protected function showContent() : void
+    protected function showContent(): void
     {
         global $DIC;
         $config = new ilWhiteboardConfig();
@@ -197,18 +200,17 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
         $role = $this->isAdmin() ? "admin" : "user";
         $board->setVariable("ROLE", $role);
 
-        $board->setVariable("WEBSOCKETURL", "wss://".$config->getWebsocket());
+        $board->setVariable("WEBSOCKETURL", "wss://" . $config->getWebsocket());
         $board->setVariable("ROOMFULL", $this->object->txt("room_full"));
         $board->setVariable("ALREADYACCESSED", $this->object->txt("open_other_tab"));
         $board->setVariable("WEBSOCKETERROR", $this->object->txt("websocket_error"));
 
         $tpl->setContent($board->get());
-
     }
 
-    protected function isAdmin(): bool{
-        return ($this->checkPermissionBool("redact") ||$this->checkPermissionBool("write"));
+    protected function isAdmin(): bool
+    {
+        return ($this->checkPermissionBool("redact") || $this->checkPermissionBool("write"));
     }
-
 
 }

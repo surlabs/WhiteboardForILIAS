@@ -1,41 +1,42 @@
 <?php
+declare(strict_types=1);
 
-/**
- * This file is part of ILIAS, a powerful learning management system
- * published by ILIAS open source e-Learning e.V.
+/*
+ *  This file is part of the Whiteboard Repository Object plugin for ILIAS, a collaborative online whiteboard tool,
+ *  developed by SURLABS with funding from the University of Freiburg.
  *
- * ILIAS is licensed with the GPL-3.0,
- * see https://www.gnu.org/licenses/gpl-3.0.en.html
- * You should have received a copy of said license along with the
- * source code, too.
+ *  This plugin is freely distributed under the terms of the GNU General Public License version 3 (GPL-3.0),
+ *  a copy of which is available at https://www.gnu.org/licenses/gpl-3.0.en.html. This license allows for the free use,
+ *  modification, and distribution of this software, ensuring it remains open-source and accessible to the community.
  *
- * If this is not the case or you just want to try ILIAS, you'll find
- * us at:
- * https://www.ilias.de
- * https://github.com/ILIAS-eLearning
+ *  The Whiteboard plugin uses a version the tldraw library, which is also open-source and distributed under its specific
+ *  terms and conditions. For details on the tldraw license, please refer to https://github.com/tldraw/tldraw/blob/main/LICENSE.md.
  *
- *********************************************************************/
-
-/**
- * handles the presentation in container items (categories, courses, ...)
- * together with the corresponding ...Access class.
- * PLEASE do not create instances of larger classes here. Use the
- * ...Access class to get DB data and keep it small.
+ *  DISCLAIMER: The developers, contributors, and funding entities associated with the Whiteboard plugin or the tldraw library
+ *  assume no responsibility for any damages or losses incurred from the use of this software. Users are encouraged to review
+ *  the license agreements and comply with the terms and conditions set forth.
+ *
+ *  Community involvement is welcome. To report bugs, suggest improvements, or participate in discussions,
+ *  please visit the Mantis system and search for ILIAS Plugins under the "Whiteboard" category at https://mantis.ilias.de.
+ *
+ *  For further information, documentation, and the source code, visit our GitHub repository at
+ *  https://github.com/surlabs/Whiteboard.
  */
+
 class ilObjWhiteboardListGUI extends ilObjectPluginListGUI
 {
 
-    public function initType() : void
+    public function initType(): void
     {
         $this->setType(ilWhiteboardPlugin::ID);
     }
 
-    public function getGuiClass() : string
+    public function getGuiClass(): string
     {
         return "ilObjWhiteboardGUI";
     }
 
-    public function initCommands() : array
+    public function initCommands(): array
     {
         return array
         (
@@ -53,23 +54,14 @@ class ilObjWhiteboardListGUI extends ilObjectPluginListGUI
         );
     }
 
-    /**
-     * Get item properties
-     * @return        array                array of property arrays:
-     *                                "alert" (boolean) => display as an alert property (usually in red)
-     *                                "property" (string) => property name
-     *                                "value" (string) => property value
-     */
-    public function getProperties() : array
+    public function getProperties(): array
     {
-        global $lng, $ilUser;
-
         $props = array();
-        
+
         if (!ilObjWhiteboardAccess::checkOnline($this->obj_id)) {
             $props[] = array("alert" => true,
-                             "property" => $this->txt("status"),
-                             "value" => $this->txt("offline")
+                "property" => $this->txt("status"),
+                "value" => $this->txt("offline")
             );
         }
 

@@ -1,25 +1,31 @@
 <?php
+declare(strict_types=1);
 
-/**
- * This file is part of ILIAS, a powerful learning management system
- * published by ILIAS open source e-Learning e.V.
+/*
+ *  This file is part of the Whiteboard Repository Object plugin for ILIAS, a collaborative online whiteboard tool,
+ *  developed by SURLABS with funding from the University of Freiburg.
  *
- * ILIAS is licensed with the GPL-3.0,
- * see https://www.gnu.org/licenses/gpl-3.0.en.html
- * You should have received a copy of said license along with the
- * source code, too.
+ *  This plugin is freely distributed under the terms of the GNU General Public License version 3 (GPL-3.0),
+ *  a copy of which is available at https://www.gnu.org/licenses/gpl-3.0.en.html. This license allows for the free use,
+ *  modification, and distribution of this software, ensuring it remains open-source and accessible to the community.
  *
- * If this is not the case or you just want to try ILIAS, you'll find
- * us at:
- * https://www.ilias.de
- * https://github.com/ILIAS-eLearning
+ *  The Whiteboard plugin uses a version the tldraw library, which is also open-source and distributed under its specific
+ *  terms and conditions. For details on the tldraw license, please refer to https://github.com/tldraw/tldraw/blob/main/LICENSE.md.
  *
- *********************************************************************/
-
+ *  DISCLAIMER: The developers, contributors, and funding entities associated with the Whiteboard plugin or the tldraw library
+ *  assume no responsibility for any damages or losses incurred from the use of this software. Users are encouraged to review
+ *  the license agreements and comply with the terms and conditions set forth.
+ *
+ *  Community involvement is welcome. To report bugs, suggest improvements, or participate in discussions,
+ *  please visit the Mantis system and search for ILIAS Plugins under the "Whiteboard" category at https://mantis.ilias.de.
+ *
+ *  For further information, documentation, and the source code, visit our GitHub repository at
+ *  https://github.com/surlabs/Whiteboard.
+ */
 class ilObjWhiteboard extends ilObjectPlugin
 {
-    protected bool $online = false;
 
+    protected bool $online = false;
     protected bool $all_read = false;
 
     public function __construct($a_ref_id = 0)
@@ -27,30 +33,27 @@ class ilObjWhiteboard extends ilObjectPlugin
         parent::__construct($a_ref_id);
     }
 
-    final protected function initType() : void
+    final protected function initType(): void
     {
         $this->setType(ilWhiteboardPlugin::ID);
     }
 
-    protected function doCreate(bool $clone_mode = false) : void
+    protected function doCreate(bool $clone_mode = false): void
     {
         global $ilDB;
-
         $ilDB->manipulate(
             "INSERT INTO rep_robj_xswb_data " .
             "(id, is_online, all_read) VALUES (" .
             $ilDB->quote($this->getId(), "integer") . "," .
             $ilDB->quote(0, "integer") . "," .
             $ilDB->quote(0, "integer") .
-
             ")"
         );
     }
 
-    protected function doRead() : void
+    protected function doRead(): void
     {
         global $ilDB;
-
         $set = $ilDB->query(
             "SELECT * FROM rep_robj_xswb_data " .
             " WHERE id = " . $ilDB->quote($this->getId(), "integer")
@@ -61,7 +64,7 @@ class ilObjWhiteboard extends ilObjectPlugin
         }
     }
 
-    protected function doUpdate() : void
+    protected function doUpdate(): void
     {
         global $ilDB;
         $ilDB->manipulate(
@@ -72,17 +75,16 @@ class ilObjWhiteboard extends ilObjectPlugin
         );
     }
 
-    protected function doDelete() : void
+    protected function doDelete(): void
     {
         global $ilDB;
-
         $ilDB->manipulate(
             "DELETE FROM rep_robj_xswb_data WHERE " .
             " id = " . $ilDB->quote($this->getId(), "integer")
         );
     }
 
-    protected function doCloneObject($new_obj, $a_target_id, $a_copy_id = null) : void
+    protected function doCloneObject($new_obj, $a_target_id, $a_copy_id = null): void
     {
         $prevId = $this->getId();
         $new_obj->update();
@@ -91,7 +93,7 @@ class ilObjWhiteboard extends ilObjectPlugin
         $config = new ilWhiteboardConfig();
 
         $payload = json_encode(array("from" => $prevId, "to" => $newId));
-        $ch = curl_init('https://'.$config->getWebsocket().'/clone-room');
+        $ch = curl_init('https://' . $config->getWebsocket() . '/clone-room');
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -101,25 +103,26 @@ class ilObjWhiteboard extends ilObjectPlugin
 
     }
 
-    public function setOnline(bool $a_val) : void
+    //Typification undone at the en of the alpha
+    public function setOnline($a_val): void
     {
-        $this->online = $a_val;
+        $this->online = (bool)$a_val;
     }
 
-    public function isOnline() : bool
+    public function isOnline(): bool
     {
         return $this->online;
     }
 
-    public function setAllRead(bool $p_val) : void
+    //Typification undone at the en of the alpha
+    public function setAllRead($p_val): void
     {
-        $this->all_read = $p_val;
+        $this->all_read = (bool)$p_val;
     }
 
-    public function isAllRead() : bool
+    public function isAllRead(): bool
     {
         return $this->all_read;
     }
-    
 
 }
