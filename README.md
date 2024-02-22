@@ -71,6 +71,6 @@ Ensure the WebSocket server is running and accessible before configuring the Whi
 
 After installation and configuration, the Whiteboard plugin allows users to create and collaborate on whiteboards within the Ilias platform. Users can access the whiteboard feature through the plugin's interface in their courses or groups.
 
-## Support
+## Bug reports
 
-For support, please create an issue in the GitHub repository of the Whiteboard plugin or contact Surlabs directly.
+To report bugs, suggest improvements, or participate in discussions, please visit the Mantis system and search for ILIAS Plugins under the "Whiteboard" category at https://mantis.ilias.de.
