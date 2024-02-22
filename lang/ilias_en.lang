@@ -40,7 +40,7 @@ offline#:#Offline
 status#:#Status
 settings#:#Whiteboard Settings
 websocket_url#:#Websocket URL
-info_websocket_url#:#The Websocket URL is used to connect to the Websocket server. This is necessary for the collaborative whiteboard.
+info_websocket_url#:#The Websocket URL is used to connect to the Websocket server. This is necessary for the collaborative whiteboard. Only domain and port, for example: ilias8.com:5123
 info_config_saved#:#The configuration has been saved.
 room_full#:#The whiteboard room is full.
 open_other_tab#:#You have already opened this room in another window.

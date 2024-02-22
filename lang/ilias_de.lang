@@ -40,7 +40,7 @@ offline#:#Offline
 status#:#Status
 settings#:#Einstellungen
 info_websocket_url#:#Websocket URL
-info_websocket_url_info#:#Die Websocket URL wird benötigt, um die Whiteboard-App zu starten.
+info_websocket_url_info#:#Die Websocket URL wird benötigt, um die Whiteboard-App zu starten. Nur Domäne und Port, zum Beispiel: ilias8.com:5123
 info_config_saved#:#Die Konfiguration wurde gespeichert.
 room_full#:#Der Whiteboard-Raum ist voll.
 open_other_tab#:#In einem anderen Tab öffnen.

@@ -28,7 +28,7 @@ class ilWhiteboardPlugin extends ilRepositoryObjectPlugin
 
     protected function uninstallCustom() : void
     {
-        // TODO: Nothing to do here.
+        // TODO: Implement uninstallCustom() method.
     }
 
     public function allowCopy() : bool

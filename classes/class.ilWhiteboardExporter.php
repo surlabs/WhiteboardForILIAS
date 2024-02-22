@@ -48,7 +48,7 @@ class ilWhiteboardExporter extends ilXmlExporter
 
     public function init() : void
     {
-        // TODO: Implement init() method.
+
     }
 
     /**

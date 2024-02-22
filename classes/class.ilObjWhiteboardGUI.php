@@ -133,9 +133,7 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
         // Construct the form with form fields
         $form_action = $ctrl->getFormAction($this, "saveProperties");
         $form_fields = ['title' => $title, 'description' => $description, 'default_permissions'=>$permission, 'online' => $online];
-        $form = $ui->input()->container()->form()->standard($form_action, $form_fields);
-
-        return $form;
+        return $ui->input()->container()->form()->standard($form_action, $form_fields);
     }
 
 
@@ -185,7 +183,6 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
         /** @var ilObjWhiteboard $object */
         $object = $this->object;
         $tpl->addJavaScript('Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render/templates/default/index.js');
-        //$tpl->addCss('Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render/templates/default/whiteboard.css');
 
         $board = new ilTemplate('index.html', true, true, "Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render");
 
@@ -200,12 +197,9 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
         $role = $this->isAdmin() ? "admin" : "user";
         $board->setVariable("ROLE", $role);
 
-        $board->setVariable("WEBSOCKETURL", $config->getWebsocket());
-
+        $board->setVariable("WEBSOCKETURL", "wss://".$config->getWebsocket());
         $board->setVariable("ROOMFULL", $this->object->txt("room_full"));
-
         $board->setVariable("ALREADYACCESSED", $this->object->txt("open_other_tab"));
-
         $board->setVariable("WEBSOCKETERROR", $this->object->txt("websocket_error"));
 
         $tpl->setContent($board->get());

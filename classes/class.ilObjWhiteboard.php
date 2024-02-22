@@ -16,7 +16,7 @@
  *
  *********************************************************************/
 
-class ilObjWhiteboard extends ilObjectPlugin implements ilLPStatusPluginInterface
+class ilObjWhiteboard extends ilObjectPlugin
 {
     protected bool $online = false;
 
@@ -84,8 +84,21 @@ class ilObjWhiteboard extends ilObjectPlugin implements ilLPStatusPluginInterfac
 
     protected function doCloneObject($new_obj, $a_target_id, $a_copy_id = null) : void
     {
-        //$new_obj->setOnline($this->isOnline());
+        $prevId = $this->getId();
         $new_obj->update();
+        $newId = $new_obj->getId();
+
+        $config = new ilWhiteboardConfig();
+
+        $payload = json_encode(array("from" => $prevId, "to" => $newId));
+        $ch = curl_init('https://'.$config->getWebsocket().'/clone-room');
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json', 'Content-Length: ' . strlen($payload)));
+        curl_close($ch);
+
+
     }
 
     public function setOnline(bool $a_val) : void
@@ -107,35 +120,6 @@ class ilObjWhiteboard extends ilObjectPlugin implements ilLPStatusPluginInterfac
     {
         return $this->all_read;
     }
-
-    public function getLPCompleted() : array
-    {
-        return array();
-    }
-
-    public function getLPNotAttempted() : array
-    {
-        return array();
-    }
-
-    public function getLPFailed() : array
-    {
-        return array(6);
-    }
-
-    public function getLPInProgress() : array
-    {
-        return array();
-    }
-
-    public function getLPStatusForUser(int $a_user_id) : int
-    {
-        global $ilUser;
-        if ($ilUser->getId() == $a_user_id) {
-            return $_SESSION[ilObjWhiteboardGUI::LP_SESSION_ID] ?? 0;
-        } else {
-            return ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM;
-        }
-    }
+    
 
 }
