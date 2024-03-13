@@ -36,7 +36,7 @@ class ilWhiteboardConfigGUI extends ilPluginConfigGUI
 {
     private ilWhiteboardConfig $object;
     private static Factory $factory;
-    protected ilCtrlInterface $control;
+    protected $control;
     protected ilGlobalTemplateInterface $tpl;
     protected $request;
     protected Renderer $renderer;
@@ -45,7 +45,7 @@ class ilWhiteboardConfigGUI extends ilPluginConfigGUI
      * @throws ilCtrlException
      * @throws ilException
      */
-    function performCommand(string $cmd): void
+    function performCommand($cmd): void
     {
         global $DIC;
 

@@ -25,7 +25,7 @@ declare(strict_types=1);
 class ilObjWhiteboardAccess extends ilObjectPluginAccess implements ilConditionHandling
 {
 
-    public function _checkAccess(string $cmd, string $permission, int $ref_id, int $obj_id, ?int $user_id = null): bool
+    public function _checkAccess($cmd, $permission, $ref_id, $obj_id, $user_id = null): bool
     {
         global $ilUser, $ilAccess;
 
@@ -45,7 +45,7 @@ class ilObjWhiteboardAccess extends ilObjectPluginAccess implements ilConditionH
         return true;
     }
 
-    public static function checkOnline(int $a_id): bool
+    public static function checkOnline($a_id): bool
     {
         global $ilDB;
         $set = $ilDB->query(
@@ -70,10 +70,10 @@ class ilObjWhiteboardAccess extends ilObjectPluginAccess implements ilConditionH
     }
 
     public static function checkCondition(
-        int    $a_trigger_obj_id,
-        string $a_operator,
-        string $a_value,
-        int    $a_usr_id
+        $a_trigger_obj_id,
+        $a_operator,
+        $a_value,
+        $a_usr_id
     ): bool
     {
         $ref_ids = ilObject::_getAllReferences($a_trigger_obj_id);

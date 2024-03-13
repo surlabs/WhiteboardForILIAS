@@ -31,9 +31,9 @@ use \ILIAS\UI\Component\Input\Container\Form\Standard;
  */
 class ilObjWhiteboardGUI extends ilObjectPluginGUI
 {
-    protected ilCtrl $ctrl;
-    protected ilTabsGUI $tabs;
-    public ilGlobalTemplateInterface $tpl;
+    //protected ilCtrl $ctrl;
+    //protected ilTabsGUI $tabs;
+    //public ilGlobalTemplateInterface $tpl;
     protected ilWhiteboardConfig $config;
 
     protected function afterConstructor(): void
@@ -186,10 +186,9 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
         /** @var ilObjWhiteboard $object */
         $object = $this->object;
         $tpl->addJavaScript('Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render/templates/default/index.js');
-
         $board = new ilTemplate('index.html', true, true, "Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render");
 
-        $idIlias = $this->getObject()->getId();
+        $idIlias = $this->object->getRefId();
         $userName = $DIC->user()->getFullname();
         $allRead = $object->isAllRead() ? "true" : "false";
 
@@ -201,9 +200,9 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
         $board->setVariable("ROLE", $role);
 
         $board->setVariable("WEBSOCKETURL", "wss://" . $config->getWebsocket());
-        $board->setVariable("ROOMFULL", $this->object->txt("room_full"));
-        $board->setVariable("ALREADYACCESSED", $this->object->txt("open_other_tab"));
-        $board->setVariable("WEBSOCKETERROR", $this->object->txt("websocket_error"));
+        $board->setVariable("ROOMFULL", $this->plugin->txt("room_full"));
+        $board->setVariable("ALREADYACCESSED", $this->plugin->txt("open_other_tab"));
+        $board->setVariable("WEBSOCKETERROR", $this->plugin->txt("websocket_error"));
 
         $tpl->setContent($board->get());
     }
