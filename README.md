@@ -37,6 +37,7 @@ cd Customizing/global/plugins/Services/Repository/RepositoryObject
 
 ```bash
 git clone https://github.com/surlabs/Whiteboard.git Whiteboard
+git checkout ilias7
 ```
 
 ### Step 2: Install Dependencies
