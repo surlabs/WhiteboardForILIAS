@@ -19,7 +19,10 @@ title#:#Title
 description#:#Description
 default_permissions#:#Default permissions
 all_write#:#All users can write
-all_read#:#Course and group administrators only can write
+all_write_byline#:#All users can write by default
+all_read#:#Only course and group administrators can write
+all_read_byline#:#Only course and group administrators can write by default
+disclaimer#:#Only course and group administrators can write
 online#:#Online
 save#:#Save
 update#:#Update

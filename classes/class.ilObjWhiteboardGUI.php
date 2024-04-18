@@ -129,8 +129,8 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
         $description = $ui->input()->field()->textarea($lng->txt("description"))->withValue($this->object->getDescription());
         $permission = $ui->input()->field()->radio($this->plugin->txt("default_permissions"))
             ->withRequired(true)
-            ->withOption('all_read', $this->plugin->txt('all_read'))
-            ->withOption('all_write', $this->plugin->txt('all_write'))
+            ->withOption('all_read', $this->plugin->txt('all_read'), $this->plugin->txt('all_read_byline'))
+            ->withOption('all_write', $this->plugin->txt('all_write'), $this->plugin->txt('all_write_byline'))
             ->withValue($this->object->isAllRead() ? 'all_read' : 'all_write');
 
         $online = $ui->input()->field()->checkbox($lng->txt("online"))->withValue($this->object->isOnline());
@@ -203,6 +203,9 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
         $board->setVariable("ROOMFULL", $this->plugin->txt("room_full"));
         $board->setVariable("ALREADYACCESSED", $this->plugin->txt("open_other_tab"));
         $board->setVariable("WEBSOCKETERROR", $this->plugin->txt("websocket_error"));
+
+        $disclaimer_text = $this->isAdmin() ? "" : $this->object->txt("disclaimer");
+        $board->setVariable("DISCLAIMER", $disclaimer_text);
 
         $tpl->setContent($board->get());
     }
