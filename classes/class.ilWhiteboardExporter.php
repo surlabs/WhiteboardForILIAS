@@ -26,7 +26,7 @@ declare(strict_types=1);
 class ilWhiteboardExporter extends ilXmlExporter
 {
 
-    public function getXmlRepresentation(string $a_entity, string $a_schema_version, string $a_id)
+    public function getXmlRepresentation($a_entity, $a_schema_version, $a_id)
     {
         $ref_ids = ilObject::_getAllReferences((int)$a_id);
         $ref_id = array_shift($ref_ids);
@@ -47,7 +47,7 @@ class ilWhiteboardExporter extends ilXmlExporter
 
     }
 
-    public function getValidSchemaVersions(string $a_entity): array
+    public function getValidSchemaVersions($a_entity): array
     {
         return array(
             "8.0.0" => array(
