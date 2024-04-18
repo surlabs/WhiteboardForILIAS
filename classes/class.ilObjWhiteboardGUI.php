@@ -127,16 +127,21 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
             ->withValue($this->object->getTitle());
 
         $description = $ui->input()->field()->textarea($lng->txt("description"))->withValue($this->object->getDescription());
+
+        // Checkbox for online
+        $online = $ui->input()->field()->checkbox($lng->txt("online"))->withValue($this->object->isOnline());
+
+
+        // Input field for description
         $permission = $ui->input()->field()->radio($this->plugin->txt("default_permissions"))
             ->withRequired(true)
             ->withOption('all_read', $this->plugin->txt('all_read'))
             ->withOption('all_write', $this->plugin->txt('all_write'))
             ->withValue($this->object->isAllRead() ? 'all_read' : 'all_write');
 
-        $online = $ui->input()->field()->checkbox($lng->txt("online"))->withValue($this->object->isOnline());
-
+        // Construct the form with form fields
         $form_action = $ctrl->getFormAction($this, "saveProperties");
-        $form_fields = ['title' => $title, 'description' => $description, 'default_permissions' => $permission, 'online' => $online];
+        $form_fields = ['title' => $title, 'description' => $description, 'online' => $online, 'default_permissions'=>$permission];
         return $ui->input()->container()->form()->standard($form_action, $form_fields);
     }
 

@@ -18,8 +18,8 @@ cat_create_xswb#:#Erstelle Whiteboard
 title#:#Titel
 description#:#Beschreibung
 default_permissions#:#Standardberechtigungen
-all_write#:#Alle Benutzer können bearbeiten
-all_read#:#Alle Benutzer können lesen
+all_write#:#Alle Benutzer können schreiben
+all_read#:#Nur Kurs- und Gruppenadministratoren können schreiben
 online#:#Online
 save#:#Speichern
 update#:#Update
