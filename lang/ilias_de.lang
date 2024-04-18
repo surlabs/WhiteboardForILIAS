@@ -17,9 +17,12 @@ root_create_xswb#:#Erstelle Whiteboard
 cat_create_xswb#:#Erstelle Whiteboard
 title#:#Titel
 description#:#Beschreibung
-default_permissions#:#Standardberechtigungen
+default_permissions#:#Whiteboard bearbeiten
 all_write#:#Alle Benutzer können schreiben
+all_write_byline#:#Alle Benutzer können Inhalte auf dem Whiteboard hinzufügen oder entfernen
 all_read#:#Nur Kurs- und Gruppenadministratoren können schreiben
+all_read_byline#:#Nur Kurs- und Gruppen-Admins können Inhalte auf dem Whiteboard hinzufügen oder entfernen, alle anderen Benutzer greifen im Nur-Lesen-Modus zu
+disclaimer#:#Nur Kurs- und Gruppen-Admins können Inhalte auf dem Whiteboard hinzufügen oder entfernen, alle anderen Benutzer greifen im Nur-Lesen-Modus zu
 online#:#Online
 save#:#Speichern
 update#:#Update

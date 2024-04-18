@@ -135,8 +135,8 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
         // Input field for description
         $permission = $ui->input()->field()->radio($this->plugin->txt("default_permissions"))
             ->withRequired(true)
-            ->withOption('all_read', $this->plugin->txt('all_read'))
-            ->withOption('all_write', $this->plugin->txt('all_write'))
+            ->withOption('all_read', $this->plugin->txt('all_read'), $this->plugin->txt('all_read_byline'))
+            ->withOption('all_write', $this->plugin->txt('all_write'), $this->plugin->txt('all_write_byline'))
             ->withValue($this->object->isAllRead() ? 'all_read' : 'all_write');
 
         // Construct the form with form fields
@@ -209,6 +209,10 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
         $board->setVariable("ROOMFULL", $this->object->txt("room_full"));
         $board->setVariable("ALREADYACCESSED", $this->object->txt("open_other_tab"));
         $board->setVariable("WEBSOCKETERROR", $this->object->txt("websocket_error"));
+
+        $disclaimer_text = $this->isAdmin() ? "" : $this->object->txt("disclaimer");
+        $board->setVariable("DISCLAIMER", $disclaimer_text);
+
 
         $tpl->setContent($board->get());
     }
