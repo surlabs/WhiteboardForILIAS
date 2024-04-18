@@ -26,7 +26,7 @@ declare(strict_types=1);
 class ilWhiteboardExporter extends ilXmlExporter
 {
 
-    public function getXmlRepresentation(string $a_entity, string $a_schema_version, string $a_id): string
+    public function getXmlRepresentation(string $a_entity, string $a_schema_version, string $a_id)
     {
         $ref_ids = ilObject::_getAllReferences((int)$a_id);
         $ref_id = array_shift($ref_ids);
