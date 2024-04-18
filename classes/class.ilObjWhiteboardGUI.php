@@ -136,7 +136,7 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
         $online = $ui->input()->field()->checkbox($lng->txt("online"))->withValue($this->object->isOnline());
 
         $form_action = $ctrl->getFormAction($this, "saveProperties");
-        $form_fields = ['title' => $title, 'description' => $description, 'default_permissions' => $permission, 'online' => $online];
+        $form_fields = ['title' => $title, 'description' => $description, 'online' => $online, 'default_permissions' => $permission];
         return $ui->input()->container()->form()->standard($form_action, $form_fields);
     }
 
