@@ -27,11 +27,11 @@ class ilWhiteboardImporter extends ilXmlImporter
 {
 
     public function importXmlRepresentation(
-        string          $a_entity,
-        string          $a_id,
-        string          $a_xml,
-        ilImportMapping $a_mapping
-    ): void
+        $a_entity,
+        $a_id,
+        $a_xml,
+        $a_mapping
+    )
     {
         $xml = simplexml_load_string($a_xml);
         $pl = new ilWhiteboardPlugin();
