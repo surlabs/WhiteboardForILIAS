@@ -1,4 +1,12 @@
-# Whiteboard
+<div alt style="text-align: center; transform: scale(.5);">
+	<picture>
+		<source media="(prefers-color-scheme: dark)" srcset="https://github.com/surlabs/WhiteboardForILIAS/blob/ilias7/templates/images/GitBannerWhiteboard.png" />
+		<img alt="Whiteboard" src="https://github.com/surlabs/WhiteboardForILIAS/blob/ilias7/templates/images/GitBannerWhiteboard.png" />
+	</picture>
+</div>
+
+# Whiteboard Repository Object Plugin for ILIAS 8
+This plugin allows users to use an interactive and collaborative realtime whiteboard in ILIAS
 
 ## Description
 
