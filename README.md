@@ -1,4 +1,12 @@
-# Whiteboard
+<div alt style="text-align: center; transform: scale(.5);">
+	<picture>
+		<source media="(prefers-color-scheme: dark)" srcset="https://github.com/surlabs/Panopto/blob/ilias8/templates/images/GitBannerPanopto.png" />
+		<img alt="Panopto" src="https://github.com/surlabs/Panopto/blob/ilias8/templates/images/GitBannerPanopto.png"" />
+	</picture>
+</div>
+
+# Whiteboard Repository Object Plugin for ILIAS 8
+This plugin allows users to use an interactive and collaborative realtime whiteboard in ILIAS
 
 ## Description
 
