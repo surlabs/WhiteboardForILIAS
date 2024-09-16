@@ -1,20 +1,20 @@
-obj_xswb#:#Whiteboard-Raum
-objs_xswb#:#Whiteboard-Räume
-obj_xswb_duplicate#:#Kopieren
-objs_xswb_duplicate#:#Kopiere Whiteboard
-obj_xswb_select#:#Wähle Whiteboard
+obj_xswb#:#Whiteboard
+objs_xswb#:#Whiteboards
+obj_xswb_duplicate#:#Whiteboard kopieren
+objs_xswb_duplicate#:#Whiteboards kopieren
+obj_xswb_select#:#Whiteboard auswählen
 xswb_add#:#Whiteboard hinzufügen
 xswb_new#:#Neues Whiteboard
 xswb_read#:#Lesezugriff auf Whiteboard
 xswb_write#:#Whiteboard bearbeiten
 xswb_delete#:#Whiteboard löschen
 xswb_visible#:#Whiteboard ist sichtbar
-xswb_edit_permission#:#Zugriffsrecht bearbeiten
-crs_create_xswb#:#Erstelle Whiteboard
-grp_create_xswb#:#Erstelle Whiteboard
-fold_create_xswb#:#Erstelle Whiteboard
-root_create_xswb#:#Erstelle Whiteboard
-cat_create_xswb#:#Erstelle Whiteboard
+xswb_edit_permission#:#Rechte bearbeiten
+crs_create_xswb#:#Whiteboard anlegen
+grp_create_xswb#:#Whiteboard anlegen
+fold_create_xswb#:#Whiteboard anlegen
+root_create_xswb#:#Whiteboard anlegen
+cat_create_xswb#:#Whiteboard anlegen
 title#:#Titel
 description#:#Beschreibung
 default_permissions#:#Standardberechtigungen
