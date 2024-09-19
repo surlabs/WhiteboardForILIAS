@@ -21,7 +21,7 @@
  *  https://github.com/surlabs/Whiteboard.
  */
 $id = "xswb";
-$version = "1.1.2";
+$version = "7.1.2";
 $ilias_min_version = "7.0";
 $ilias_max_version = "8.999";
 $responsible = "Jesús Copado";
