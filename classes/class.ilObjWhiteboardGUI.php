@@ -51,6 +51,7 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
 
     public function performCommand(string $cmd): void
     {
+        $this->setTitleAndDescription();
         switch ($cmd) {
             case "editProperties":
             case "updateProperties":
