@@ -34,6 +34,7 @@ class ilObjWhiteboardAccess extends ilObjectPluginAccess implements ilConditionH
         }
 
         switch ($permission) {
+            case "visible":
             case "read":
                 if (!self::checkOnline($obj_id) &&
                     !$ilAccess->checkAccessOfUser($user_id, "write", "", $ref_id)) {
