@@ -28,7 +28,7 @@ $version = "8.1";
 // ilias min and max version; must always reflect the versions that should
 // run with the plugin
 $ilias_min_version = "6.0";
-$ilias_max_version = "8.999";
+$ilias_max_version = "10.999";
 $responsible = "Jesús Copado";
 $responsible_mail = "jcopado@surlabs.com";
 $supports_export = true;
