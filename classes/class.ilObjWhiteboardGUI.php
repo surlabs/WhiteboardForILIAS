@@ -206,12 +206,23 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
         $board->setVariable("ALREADYACCESSED", $this->object->txt("open_other_tab"));
         $board->setVariable("WEBSOCKETERROR", $this->object->txt("websocket_error"));
 
+        $hasImportExportPermission = $this->checkImportExportPermission() ? "true" : "false";
+        $board->setVariable("HASIMPORTEXPORTPERMISSION", $hasImportExportPermission);
+
+        $board->setVariable("IMPORTCONFIRMMESSAGE", $this->plugin->txt("import_confirm_message"));
+
         $tpl->setContent($board->get());
     }
 
     protected function isAdmin(): bool
     {
         return ($this->checkPermissionBool("redact") || $this->checkPermissionBool("write"));
+    }
+
+    protected function checkImportExportPermission(): bool
+    {
+        global $DIC;
+        return $DIC->access()->checkAccess("write", "", $this->object->getRefId());
     }
 
 }
