@@ -5,7 +5,7 @@
 	</picture>
 </div>
 
-# Whiteboard Repository Object Plugin for ILIAS 8
+# Whiteboard Repository Object Plugin for ILIAS 10
 This plugin allows users to use an interactive and collaborative realtime whiteboard in ILIAS
 
 ## Description
@@ -83,3 +83,4 @@ After installation and configuration, the Whiteboard plugin allows users to crea
 ## Bug reports
 
 To report bugs, suggest improvements, or participate in discussions, please visit the Mantis system and search for ILIAS Plugins under the "Whiteboard" category at https://mantis.ilias.de.
+
