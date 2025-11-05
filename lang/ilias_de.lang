@@ -32,7 +32,7 @@ offline:#:Offline
 important#:#Wichtig
 online_status#:#Online Status
 lp_status#:#Lernfortschritt
-update_successful#:Die Änderungen wurden gespeichert.
+update_successful#:#Die Änderungen wurden gespeichert.
 news_title#:#Titel (en)
 news_content#:#Inhalt (en)
 xswb_copy#:#Whiteboard kopieren
@@ -44,4 +44,5 @@ info_websocket_url_info#:#Die Websocket URL wird benötigt, um die Whiteboard-Ap
 info_config_saved#:#Die Konfiguration wurde gespeichert.
 room_full#:#Der Whiteboard-Raum ist voll.
 open_other_tab#:#In einem anderen Tab öffnen.
+
 websocket_error#:#Websocket-Verbindung fehlgeschlagen.
