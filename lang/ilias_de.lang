@@ -19,7 +19,7 @@ title#:#Titel
 description#:#Beschreibung
 default_permissions#:#Standardberechtigungen
 all_write#:#Alle Benutzer können das Whiteboard ansehen und bearbeiten
-all_read#:#Nur Kurs- bzw Gruppenadministratoren können das Whiteborad bearbeiten, alle anderen Benutzer können das Whiteboard nur ansehen, aber nicht bearbeiten
+all_read#:#Nur Kurs- bzw Gruppenadministratoren können das Whiteboard bearbeiten, alle anderen Benutzer können das Whiteboard nur ansehen, aber nicht bearbeiten
 online#:#Online
 save#:#Speichern
 update#:#Update
