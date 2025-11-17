@@ -186,9 +186,9 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
 
         /** @var ilObjWhiteboard $object */
         $object = $this->object;
-        $tpl->addJavaScript('/Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render/templates/default/index.js');
+        $tpl->addJavaScript('Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render/templates/default/index.js');
 
-        $board = new ilTemplate('index.html', true, true, "public/Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render");
+        $board = new ilTemplate('index.html', true, true, "Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render");
 
         $idIlias = $this->getObject()->getId();
         $userName = $DIC->user()->getFullname();
@@ -206,12 +206,23 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
         $board->setVariable("ALREADYACCESSED", $this->object->txt("open_other_tab"));
         $board->setVariable("WEBSOCKETERROR", $this->object->txt("websocket_error"));
 
+        $hasImportExportPermission = $this->checkImportExportPermission() ? "true" : "false";
+        $board->setVariable("HASIMPORTEXPORTPERMISSION", $hasImportExportPermission);
+
+        $board->setVariable("IMPORTCONFIRMMESSAGE", $this->plugin->txt("import_confirm_message"));
+
         $tpl->setContent($board->get());
     }
 
     protected function isAdmin(): bool
     {
         return ($this->checkPermissionBool("redact") || $this->checkPermissionBool("write"));
+    }
+
+    protected function checkImportExportPermission(): bool
+    {
+        global $DIC;
+        return $DIC->access()->checkAccess("write", "", $this->object->getRefId());
     }
 
 }

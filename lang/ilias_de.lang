@@ -19,7 +19,7 @@ title#:#Titel
 description#:#Beschreibung
 default_permissions#:#Standardberechtigungen
 all_write#:#Alle Benutzer können das Whiteboard ansehen und bearbeiten
-all_read#:#Nur Kurs- bzw Gruppenadministratoren können das Whiteborad bearbeiten, alle anderen Benutzer können das Whiteboard nur ansehen, aber nicht bearbeiten
+all_read#:#Nur Kurs- bzw Gruppenadministratoren können das Whiteboard bearbeiten, alle anderen Benutzer können das Whiteboard nur ansehen, aber nicht bearbeiten
 online#:#Online
 save#:#Speichern
 update#:#Update
@@ -32,7 +32,7 @@ offline:#:Offline
 important#:#Wichtig
 online_status#:#Online Status
 lp_status#:#Lernfortschritt
-update_successful#:Die Änderungen wurden gespeichert.
+update_successful#:#Die Änderungen wurden gespeichert.
 news_title#:#Titel (en)
 news_content#:#Inhalt (en)
 xswb_copy#:#Whiteboard kopieren
@@ -45,3 +45,4 @@ info_config_saved#:#Die Konfiguration wurde gespeichert.
 room_full#:#Der Whiteboard-Raum ist voll.
 open_other_tab#:#In einem anderen Tab öffnen.
 websocket_error#:#Websocket-Verbindung fehlgeschlagen.
+import_confirm_message#:#Das Importieren einer neuen Datei ersetzt den aktuellen Inhalt des Whiteboards. Möchten Sie fortfahren?
