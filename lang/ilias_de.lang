@@ -44,5 +44,5 @@ info_websocket_url_info#:#Die Websocket URL wird benötigt, um die Whiteboard-Ap
 info_config_saved#:#Die Konfiguration wurde gespeichert.
 room_full#:#Der Whiteboard-Raum ist voll.
 open_other_tab#:#In einem anderen Tab öffnen.
-
 websocket_error#:#Websocket-Verbindung fehlgeschlagen.
+import_confirm_message#:#Das Importieren einer neuen Datei ersetzt den aktuellen Inhalt des Whiteboards. Möchten Sie fortfahren?

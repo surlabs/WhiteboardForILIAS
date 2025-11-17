@@ -45,3 +45,4 @@ info_config_saved#:#The configuration has been saved.
 room_full#:#The whiteboard room is full.
 open_other_tab#:#You have already opened this room in another window.
 websocket_error#:#The Websocket server could not be reached. Please, contact your system administrator.
+import_confirm_message#:#Importing a new file will replace the current content of the whiteboard. Do you want to proceed?
