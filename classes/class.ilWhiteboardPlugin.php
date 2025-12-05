@@ -42,4 +42,12 @@ class ilWhiteboardPlugin extends ilRepositoryObjectPlugin
         return true;
     }
 
+    /**
+     * Get the title icon
+     */
+    public static function _getIcon(string $a_type): string
+    {
+        return 'Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/templates/images/icon_xswb.svg';
+    }
+
 }
