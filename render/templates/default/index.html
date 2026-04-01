@@ -1,4 +1,16 @@
 <div id="root"></div>
+<style>
+    #root {
+        width: 100%;
+        height: calc(100vh - 120px);
+        min-height: 400px;
+    }
+    @media (min-width: 768px) {
+        #root {
+            height: calc(100vh - 180px);
+        }
+    }
+</style>
 <div id="roomid" class="hidden">{ROOM}</div>
 <div id="username" class="hidden">{USERNAME}</div>
 <div id="role" class="hidden">{ROLE}</div>
