@@ -186,9 +186,15 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
 
         /** @var ilObjWhiteboard $object */
         $object = $this->object;
-        $tpl->addJavaScript('Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render/templates/default/index.js');
+        $tpl->addJavaScript('Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render/templates/default/index.js'
+    );
 
-        $board = new ilTemplate('index.html', true, true, "Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render");
+        $board = new ilTemplate(
+            'index.html',
+            true,
+            true,
+            'public/Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render'
+        );
 
         $idIlias = $this->getObject()->getId();
         $userName = $DIC->user()->getFullname();
