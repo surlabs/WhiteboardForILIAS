@@ -1,11 +1,6 @@
-<div alt style="text-align: center; transform: scale(.5);">
-	<picture>
-		<source media="(prefers-color-scheme: dark)" srcset="https://github.com/surlabs/WhiteboardForILIAS/blob/ilias8/templates/images/GitBannerWhiteboard.png" />
-		<img alt="Whiteboard" src="https://github.com/surlabs/WhiteboardForILIAS/blob/ilias8/templates/images/GitBannerWhiteboard.png" />
-	</picture>
-</div>
+![Whiteboard](https://github.com/user-attachments/assets/cd2784f9-ceeb-4703-96f4-f09d6a3b0ddc)
 
-# Whiteboard Repository Object Plugin for ILIAS 10
+# Whiteboard Repository Object Plugin for ILIAS 11
 This plugin allows users to use an interactive and collaborative realtime whiteboard in ILIAS
 
 ## Description
@@ -45,7 +40,7 @@ cd Customizing/global/plugins/Services/Repository/RepositoryObject
 
 ```bash
 git clone https://github.com/surlabs/Whiteboard.git Whiteboard
-git checkout ilias8
+git checkout ilias9
 ```
 
 ### Step 2: Install Dependencies

@@ -186,9 +186,16 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
 
         /** @var ilObjWhiteboard $object */
         $object = $this->object;
-        $tpl->addJavaScript('Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render/templates/default/index.js');
+        $tpl->addJavaScript('Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render/templates/default/index.js'
+    );
 
         $board = new ilTemplate('index.html', true, true, "public/Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render");
+        $board = new ilTemplate(
+            'index.html',
+            true,
+            true,
+            'public/Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render'
+        );
 
         $idIlias = $this->getObject()->getId();
         $userName = $DIC->user()->getFullname();
@@ -218,8 +225,8 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
     {
         return ($this->checkPermissionBool("redact") || $this->checkPermissionBool("write"));
     }
-	
-	protected function checkImportExportPermission(): bool
+
+    protected function checkImportExportPermission(): bool
     {
         global $DIC;
         return $DIC->access()->checkAccess("write", "", $this->object->getRefId());

@@ -21,15 +21,14 @@
  *  https://github.com/surlabs/Whiteboard.
  */
 $id = "xswb";
- 
+
 // code version; must be changed for all code changes
-$version = "10.2";
+$version = "11.0";
 
 // ilias min and max version; must always reflect the versions that should
 // run with the plugin
-$ilias_min_version = "10.0";
-$ilias_max_version = "10.999";
+$ilias_min_version = "11.0";
+$ilias_max_version = "11.999";
 $responsible = "Jesús Copado";
 $responsible_mail = "jcopado@surlabs.com";
 $supports_export = true;
-
