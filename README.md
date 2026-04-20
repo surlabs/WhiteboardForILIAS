@@ -1,6 +1,6 @@
 ![Whiteboard](https://github.com/user-attachments/assets/cd2784f9-ceeb-4703-96f4-f09d6a3b0ddc)
 
-# Whiteboard Repository Object Plugin for ILIAS 10
+# Whiteboard Repository Object Plugin for ILIAS 11
 This plugin allows users to use an interactive and collaborative realtime whiteboard in ILIAS
 
 ## Description
