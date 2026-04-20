@@ -1,4 +1,16 @@
 <div id="root"></div>
+<style>
+    #root {
+        width: 100%;
+        height: calc(100vh - 120px);
+        min-height: 400px;
+    }
+    @media (min-width: 768px) {
+        #root {
+            height: calc(100vh - 180px);
+        }
+    }
+</style>
 <div id="roomid" class="hidden">{ROOM}</div>
 <div id="username" class="hidden">{USERNAME}</div>
 <div id="role" class="hidden">{ROLE}</div>
@@ -7,5 +19,5 @@
 <div id="roomfull" class="hidden">{ROOMFULL}</div>
 <div id="alreadyaccessed" class="hidden">{ALREADYACCESSED}</div>
 <div id="websocket_error" class="hidden">{WEBSOCKETERROR}</div>
-<div id="hasImportExportPermission" style="display: none;">{HASIMPORTEXPORTPERMISSION}</div>
-<div id="importConfirmMessage" style="display: none;">{IMPORTCONFIRMMESSAGE}</div>
+<div id="hasImportExportPermission" class="hidden">{HASIMPORTEXPORTPERMISSION}</div>
+<div id="importConfirmMessage" class="hidden">{IMPORTCONFIRMMESSAGE}</div>

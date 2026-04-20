@@ -189,6 +189,7 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
         $tpl->addJavaScript('Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render/templates/default/index.js'
     );
 
+        $board = new ilTemplate('index.html', true, true, "public/Customizing/global/plugins/Services/Repository/RepositoryObject/Whiteboard/render");
         $board = new ilTemplate(
             'index.html',
             true,

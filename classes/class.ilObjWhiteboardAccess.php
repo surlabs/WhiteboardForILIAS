@@ -63,7 +63,7 @@ class ilObjWhiteboardAccess extends ilObjectPluginAccess implements ilConditionH
 
     public static function getConditionOperators(): array
     {
-        include_once './Services/Conditions/classes/class.ilConditionHandler.php'; //bugfix mantis 24891
+        include_once '/components/ILIAS/Conditions/classes/class.ilConditionHandler.php'; //bugfix mantis 24891
         return array(
             ilConditionHandler::OPERATOR_FAILED,
             ilConditionHandler::OPERATOR_PASSED
