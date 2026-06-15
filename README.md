@@ -1,11 +1,11 @@
 <div alt style="text-align: center; transform: scale(.5);">
 	<picture>
-		<source media="(prefers-color-scheme: dark)" srcset="https://github.com/surlabs/WhiteboardForILIAS/blob/ilias8/templates/images/GitBannerWhiteboard.png" />
-		<img alt="Whiteboard" src="https://github.com/surlabs/WhiteboardForILIAS/blob/ilias8/templates/images/GitBannerWhiteboard.png" />
+		<source media="(prefers-color-scheme: dark)" srcset="https://github.com/surlabs/WhiteboardForILIAS/blob/release_10/templates/images/GitBannerWhiteboard.png" />
+		<img alt="Whiteboard" src="https://github.com/surlabs/WhiteboardForILIAS/blob/release_10/templates/images/GitBannerWhiteboard.png" />
 	</picture>
 </div>
 
-# Whiteboard Repository Object Plugin for ILIAS 10
+# Whiteboard Repository Object Plugin for ILIAS 11
 This plugin allows users to use an interactive and collaborative realtime whiteboard in ILIAS
 
 ## Description
@@ -32,20 +32,20 @@ To install the Whiteboard plugin, start by creating the necessary directory stru
 1. Create the directory structure:
 
 ```bash
-mkdir -p Customizing/global/plugins/Services/Repository/RepositoryObject
+mkdir -p public/Customizing/global/plugins/Services/Repository/RepositoryObject
 ```
 
 2. Change to the created directory:
 
 ```bash
-cd Customizing/global/plugins/Services/Repository/RepositoryObject
+cd public/Customizing/global/plugins/Services/Repository/RepositoryObject
 ```
 
 3. Clone the Whiteboard plugin repository:
 
 ```bash
 git clone https://github.com/surlabs/Whiteboard.git Whiteboard
-git checkout ilias8
+git checkout release_10
 ```
 
 ### Step 2: Install Dependencies
@@ -55,7 +55,7 @@ Navigate to the base directory of your domain where Ilias is installed, and run 
 1. From the base directory of your domain, run:
 
 ```bash
-composer install -vvv
+composer install --no-dev
 ```
 
 ### Step 3: Install and Activate the Plugin in Ilias
