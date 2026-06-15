@@ -32,20 +32,20 @@ To install the Whiteboard plugin, start by creating the necessary directory stru
 1. Create the directory structure:
 
 ```bash
-mkdir -p Customizing/global/plugins/Services/Repository/RepositoryObject
+mkdir -p public/Customizing/global/plugins/Services/Repository/RepositoryObject
 ```
 
 2. Change to the created directory:
 
 ```bash
-cd Customizing/global/plugins/Services/Repository/RepositoryObject
+cd public/Customizing/global/plugins/Services/Repository/RepositoryObject
 ```
 
 3. Clone the Whiteboard plugin repository:
 
 ```bash
 git clone https://github.com/surlabs/Whiteboard.git Whiteboard
-git checkout ilias8
+git checkout release_11
 ```
 
 ### Step 2: Install Dependencies
