@@ -55,7 +55,7 @@ Navigate to the base directory of your domain where Ilias is installed, and run 
 1. From the base directory of your domain, run:
 
 ```bash
-composer install -vvv
+composer install --no-dev
 ```
 
 ### Step 3: Install and Activate the Plugin in Ilias
