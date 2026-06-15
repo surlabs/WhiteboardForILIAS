@@ -1,4 +1,9 @@
-![Whiteboard](https://github.com/user-attachments/assets/cd2784f9-ceeb-4703-96f4-f09d6a3b0ddc)
+<div alt style="text-align: center; transform: scale(.5);">
+	<picture>
+		<source media="(prefers-color-scheme: dark)" srcset="https://github.com/surlabs/WhiteboardForILIAS/blob/release_9/templates/images/GitBannerWhiteboard.png" />
+		<img alt="Whiteboard" src="https://github.com/surlabs/WhiteboardForILIAS/blob/release_9/templates/images/GitBannerWhiteboard.png" />
+	</picture>
+</div>
 
 # Whiteboard Repository Object Plugin for ILIAS 9
 This plugin allows users to use an interactive and collaborative realtime whiteboard in ILIAS
@@ -40,7 +45,7 @@ cd Customizing/global/plugins/Services/Repository/RepositoryObject
 
 ```bash
 git clone https://github.com/surlabs/Whiteboard.git Whiteboard
-git checkout ilias9
+git checkout release_9
 ```
 
 ### Step 2: Install Dependencies
@@ -50,7 +55,7 @@ Navigate to the base directory of your domain where Ilias is installed, and run 
 1. From the base directory of your domain, run:
 
 ```bash
-composer install -vvv
+composer install --no-dev
 ```
 
 ### Step 3: Install and Activate the Plugin in Ilias
@@ -78,3 +83,4 @@ After installation and configuration, the Whiteboard plugin allows users to crea
 ## Bug reports
 
 To report bugs, suggest improvements, or participate in discussions, please visit the Mantis system and search for ILIAS Plugins under the "Whiteboard" category at https://mantis.ilias.de.
+
