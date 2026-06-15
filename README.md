@@ -5,7 +5,7 @@
 	</picture>
 </div>
 
-# Whiteboard Repository Object Plugin for ILIAS 11
+# Whiteboard Repository Object Plugin for ILIAS 10
 This plugin allows users to use an interactive and collaborative realtime whiteboard in ILIAS
 
 ## Description
