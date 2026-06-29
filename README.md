@@ -67,6 +67,31 @@ composer install --no-dev
 
 1. After activating the plugin, click on the "Configure" button next to the Whiteboard plugin listing.
 2. In the configuration settings, specify the URL of your WebSocket server. This is crucial for the Whiteboard plugin to communicate with the WebSocket server for real-time collaboration features.
+3. Optionally configure the `Whiteboard auth secret` field to enable signed access tokens. Leave it empty to keep the legacy unsigned mode.
+
+## Signed Access Tokens
+
+By default, the plugin keeps the previous unsigned behavior. If the `Whiteboard auth secret` field is empty, the plugin does not render a token and the WebSocket server must also have `WHITEBOARD_AUTH_SECRET` empty.
+
+To enable the security layer, configure the same secret in both places:
+
+```text
+Plugin configuration: Whiteboard auth secret
+WebSocket server .env: WHITEBOARD_AUTH_SECRET
+```
+
+Use at least 32 random characters. The secret must never be exposed to users or added to frontend JavaScript.
+
+When enabled, the plugin generates a short-lived signed token after ILIAS permission checks and renders it in the whiteboard page. The WebSocket server validates that token before allowing a connection. The token is bound to the current room, username, permissions, and expiration time.
+
+Expected behavior:
+
+1. If the WebSocket server has `WHITEBOARD_AUTH_SECRET` set and the plugin secret is empty, whiteboard connections are rejected.
+2. If both secrets are set but differ, whiteboard connections are rejected.
+3. If both secrets are set to the same value, authorized users can connect normally.
+4. If both secrets are empty, the legacy unsigned mode is used.
+
+The signed token prevents users from accessing another whiteboard by changing the room id in the HTML. It also prevents privilege escalation by editing client-side values such as `role`, `username`, or import/export permissions.
 
 ## WebSocket Server Setup
 
