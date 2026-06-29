@@ -131,6 +131,18 @@ class ilObjWhiteboard extends ilObjectPlugin
 
         // Prepare payload for websocket server API call
         $payload = array("from" => $prevId, "to" => $newId);
+        $cloneToken = $config->createAccessToken(
+            (string) $prevId,
+            'ILIAS',
+            array(
+                'write' => true,
+                'admin' => true,
+                'importExport' => true
+            )
+        );
+        if ($cloneToken !== '') {
+            $payload['token'] = $cloneToken;
+        }
 
         // Log the websocket URL being used (for debugging configuration issues)
         $logger->info("Whiteboard cloning: Attempting to connect to websocket server at: {$websocketUrl}");

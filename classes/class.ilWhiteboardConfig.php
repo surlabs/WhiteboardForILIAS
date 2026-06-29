@@ -26,6 +26,7 @@ declare(strict_types=1);
 class ilWhiteboardConfig
 {
     protected string $websocket_url;
+    protected string $auth_secret;
 
     public function __construct()
     {
@@ -33,9 +34,23 @@ class ilWhiteboardConfig
 
         $ilDB = $DIC['ilDB'];
 
-        $result = $ilDB->query("SELECT * FROM xswb_config WHERE config_key = 'websocket_url'");
+        $this->websocket_url = $this->getConfigValue('websocket_url');
+        $this->auth_secret = $this->getConfigValue('whiteboard_auth_secret');
+    }
+
+    protected function getConfigValue(string $key): string
+    {
+        global $DIC;
+        $ilDB = $DIC['ilDB'];
+
+        $result = $ilDB->queryF(
+            "SELECT value FROM xswb_config WHERE config_key = %s",
+            array("text"),
+            array($key)
+        );
         $record = $ilDB->fetchAssoc($result);
-        $this->websocket_url = $record['value'];
+
+        return $record['value'] ?? '';
     }
 
     public function setWebsocket($value): void
@@ -58,6 +73,52 @@ class ilWhiteboardConfig
     public function getWebsocket(): string
     {
         return $this->websocket_url;
+    }
+
+    public function setAuthSecret($value): void
+    {
+        global $DIC;
+        $ilDB = $DIC['ilDB'];
+
+        $key = 'whiteboard_auth_secret';
+
+        $ilDB->update(
+            "xswb_config", array(
+            'value' => array("text", trim((string) $value))
+        ), array(
+                'config_key' => array("text", $key)
+            )
+        );
+    }
+
+    public function getAuthSecret(): string
+    {
+        return $this->auth_secret;
+    }
+
+    public function createAccessToken(string $roomId, string $username, array $permissions, int $ttlSeconds = 600): string
+    {
+        $secret = trim($this->auth_secret);
+        if ($secret === '') {
+            return '';
+        }
+
+        $payload = array(
+            'roomId' => $roomId,
+            'username' => $username,
+            'permissions' => $permissions,
+            'exp' => time() + $ttlSeconds
+        );
+
+        $encodedPayload = $this->base64UrlEncode(json_encode($payload, JSON_UNESCAPED_SLASHES));
+        $signature = $this->base64UrlEncode(hash_hmac('sha256', $encodedPayload, $secret, true));
+
+        return $encodedPayload . '.' . $signature;
+    }
+
+    protected function base64UrlEncode(string $value): string
+    {
+        return rtrim(strtr(base64_encode($value), '+/', '-_'), '=');
     }
 
 }

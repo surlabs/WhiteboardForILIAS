@@ -193,21 +193,34 @@ class ilObjWhiteboardGUI extends ilObjectPluginGUI
         $idIlias = $this->getObject()->getId();
         $userName = $DIC->user()->getFullname();
         $allRead = $object->isAllRead() ? "true" : "false";
+        $isAdmin = $this->isAdmin();
+        $hasImportExportPermission = $this->checkImportExportPermission();
+        $canWrite = $isAdmin || !$object->isAllRead();
 
         $board->setVariable("ROOM", $idIlias);
         $board->setVariable("USERNAME", $userName);
         $board->setVariable("ALLREAD", $allRead);
 
-        $role = $this->isAdmin() ? "admin" : "user";
+        $role = $isAdmin ? "admin" : "user";
         $board->setVariable("ROLE", $role);
+
+        $whiteboardToken = $config->createAccessToken(
+            (string) $idIlias,
+            $userName,
+            array(
+                'write' => $canWrite,
+                'admin' => $isAdmin,
+                'importExport' => $hasImportExportPermission
+            )
+        );
+        $board->setVariable("WHITEBOARDTOKEN", $whiteboardToken);
 
         $board->setVariable("WEBSOCKETURL", "wss://" . $config->getWebsocket());
         $board->setVariable("ROOMFULL", $this->object->txt("room_full"));
         $board->setVariable("ALREADYACCESSED", $this->object->txt("open_other_tab"));
         $board->setVariable("WEBSOCKETERROR", $this->object->txt("websocket_error"));
 
-        $hasImportExportPermission = $this->checkImportExportPermission() ? "true" : "false";
-        $board->setVariable("HASIMPORTEXPORTPERMISSION", $hasImportExportPermission);
+        $board->setVariable("HASIMPORTEXPORTPERMISSION", $hasImportExportPermission ? "true" : "false");
 
         $board->setVariable("IMPORTCONFIRMMESSAGE", $this->plugin->txt("import_confirm_message"));
 

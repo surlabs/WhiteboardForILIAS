@@ -46,3 +46,5 @@ room_full#:#The whiteboard room is full.
 open_other_tab#:#You have already opened this room in another window.
 websocket_error#:#The Websocket server could not be reached. Please, contact your system administrator.
 import_confirm_message#:#Importing a new file will replace the current content of the whiteboard. Do you want to proceed?
+whiteboard_auth_secret#:#Whiteboard auth secret
+info_whiteboard_auth_secret#:#Optional shared secret for signed Whiteboard Server access tokens. Leave empty to keep the legacy unsigned mode. If set, use the same value as WHITEBOARD_AUTH_SECRET on the Websocket Server and use at least 32 random characters.
