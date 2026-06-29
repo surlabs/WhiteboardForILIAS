@@ -48,3 +48,16 @@ if (!$ilDB->tableExists("xswb_config")) {
 }
 
 ?>
+
+<#2>
+<?php
+global $DIC;
+$ilDB = $DIC->database();
+
+$data = array(
+    'config_key' => array("text", "whiteboard_auth_secret"),
+    'value' => array("text", "")
+);
+$ilDB->insert("xswb_config", $data);
+
+?>

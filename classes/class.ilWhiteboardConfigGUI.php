@@ -94,6 +94,18 @@ class ilWhiteboardConfigGUI extends ilPluginConfigGUI
 
             $form_fields["websocket_url"] = $field;
 
+            $field = self::$factory->input()->field()->text(
+                $this->plugin_object->txt('whiteboard_auth_secret'),
+                $this->plugin_object->txt('info_whiteboard_auth_secret'))
+                ->withValue($object->getAuthSecret())
+                ->withAdditionalTransformation($DIC->refinery()->custom()->transformation(
+                    function ($v) use ($object) {
+                        $object->setAuthSecret($v);
+                    }
+                ));
+
+            $form_fields["whiteboard_auth_secret"] = $field;
+
             $section = self::$factory->input()->field()->section($form_fields, $this->plugin_object->txt("settings"), "");
 
         } catch (Exception $e) {
